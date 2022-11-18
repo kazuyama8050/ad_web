@@ -17,4 +17,8 @@ use App\Http\Controllers\Controller;
 //     return view('welcome');
 // });
 
+Route::get('/{any}', function() {
+    return view('app');
+})->where('any', '.*');
+
 // Route::get('/test', [Controller::class, 'getTest']);
