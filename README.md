@@ -1,64 +1,68 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# 広告主管理画面　要件
+- 広告がクリックされたら報酬が発生する
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 概要要件
 
-## About Laravel
+### 広告の作成
+    - テンプレート
+        - 画像
+        - テキスト
+        - 遷移先リンク
+    - ジャンルの決定
+        - 決められたジャンルカテゴリから選択
+    - 単価の決定
+        - アフィリエイターに支払う単価
+    - 審査が必ずあり、それに通れば広告が作成されたとみなす
+### レポートの閲覧
+    - 広告ごと
+    - ジャンルカテゴリごと
+    - アフィリエイター登録者ごと
+### 配信されている広告の閲覧
+    - どのサイトか
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 詳細要件
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 広告配信までの手順
+    1. テンプレートをもとに表示する広告を作成（ここで決められるのは必須要件）
+        - この際にジャンルカテゴリも決定
+        - 入札額を決定する（未決定は不可）
+    2. 広告を配信可能にする
+        - 配信可か不可で
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 広告を配信停止した場合
+アフィリエイトでは、アフィリエイターが広告を選択している都合上、広告主側で配信停止した場合の要件を考える必要がある（勝手に配信停止するのはできない）
 
-## Learning Laravel
+1.  広告主は広告ごとに広告配信停止日時を登録する
+    - １週間後以降を指定可能
+    - アフィリエイターにその広告の張り替えの猶予期間を与えるため
+        - メール（ローカルだときついかも）とアフィリエイターの管理画面で通知
+    - 配信停止予定のある広告はアフィリエイターから選択できない
+    - アフィリエイターが配信停止された広告を設定していた場合は、配信されない
+2. 配信停止中の広告の配信再開はいつでも可能とする
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### ジャンルカテゴリとは
+    - カテゴリマスタが決められている
+        - 運営側で変更がある
+    - カテゴリは階層構造
+    - 各ジャンルには出稿時の最低価格が設けられている
+    - 各ジャンルカテゴリごとに入札されている平均入札金額を算出する
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+# アフィリエイター管理画面　要件
+## 概要要件
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### アフィリエイター登録
+    - アフィリエイトに登録するには審査が必要である
+    - サイトごと（ドメインごと）に審査を行う
+    - 審査に合格するとアカウントが発行される
 
-## Contributing
+### 広告の選択
+    - 自サイトに貼り付けたいアフィリエイト広告を選択する
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+## 詳細要件
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 選択した広告を自サイトに表示させる方法
+To Do
