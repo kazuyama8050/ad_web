@@ -7,14 +7,15 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "start": "webpack-dev-server --open"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
         "autoprefixer": "^10.4.13",
         "axios": "^0.21",
         "bootstrap": "^5.2.2",
-        "css-loader": "^6.7.1",
+        "css-loader": "^6.7.2",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
@@ -28,7 +29,17 @@
         "vue-template-compiler": "^2.7.14"
     },
     "dependencies": {
+        "@babel/cli": "^7.19.3",
+        "@babel/core": "^7.20.2",
+        "@babel/preset-env": "^7.20.2",
         "@vue/cli": "^5.0.8",
-        "vue-router": "^3.2.0"
+        "babel-loader": "^9.1.0",
+        "core-js-compat": "^3.26.1",
+        "pug": "^3.0.2",
+        "pug-plugin": "^4.5.0",
+        "vue-router": "^3.2.0",
+        "webpack": "^5.75.0",
+        "webpack-cli": "^5.0.0",
+        "webpack-dev-server": "^4.11.1"
     }
 }
