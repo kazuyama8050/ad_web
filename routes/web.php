@@ -17,8 +17,8 @@ use App\Http\Controllers\Controller;
 //     return view('welcome');
 // });
 
-Route::get('/{any}', function() {
-    return view('app');
+Route::get($_ENV['DELIVELER_ROOT_PATH'].'/{any}', function() {
+    return view($_ENV['DELIVELER_ROOT_PATH'].'/app');
 })->where('any', '.*');
 
-// Route::get('/test', [Controller::class, 'getTest']);
+// Route::get('/tasks', [Controller::class, 'getTest']);

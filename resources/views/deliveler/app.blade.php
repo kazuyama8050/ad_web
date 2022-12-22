@@ -1,3 +1,8 @@
+<?php 
+    $uri = $_SERVER['REQUEST_URI'];
+    $splitUri = explode('/', $uri);
+    $lastUri = $splitUri[count($splitUri) -1];
+?>
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -14,7 +19,10 @@
 </head>
 <body>
 <div id="app">
-    <header-component></header-component>
+    
+    @if ($lastUri !== 'login')
+        <header-component></header-component>
+    @endif
 
     <router-view></router-view>
 </div>

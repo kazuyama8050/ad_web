@@ -1,7 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import HeaderComponent from "./components/HeaderComponent";
+import HeaderComponent from "./components/deliveler/HeaderComponent";
 import TaskListComponent from "./components/TaskListComponent";
+import DelivelerLogin from "./views/deliveler/LoginView";
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/js/bootstrap.bundle.min.js"
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -10,7 +13,9 @@ import TaskListComponent from "./components/TaskListComponent";
 
 require('./bootstrap');
 
-
+const DELIVELER_ROOT_PATH="/deliveler"
+const ADVERTISER_ROOT_PATH="/advertiser"
+const ADMIN_ROOT_PATH="/admin"
 
 
 /**
@@ -34,18 +39,29 @@ Vue.component('header-component', HeaderComponent);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-
- Vue.use(Router);
- window.Vue = require('vue').default;const router = new Router({
-     mode: 'history',
-     routes: [
-         {
-             path: '/tasks',
-             name: 'task.list',
-             component: TaskListComponent
-         },
-     ]
- });
+Vue.use(Router);
+window.Vue = require('vue').default;const router = new Router({
+    mode: 'history',
+    routes: [
+        {
+            path: '/tasks',
+            name: 'task.list',
+            component: TaskListComponent
+        },
+        {
+            path: DELIVELER_ROOT_PATH + '/login',
+            name: 'deliveler.login',
+            component: DelivelerLogin
+        },
+        {
+            path: DELIVELER_ROOT_PATH + '/advertise',
+            name: 'advertise.list',
+            component: {
+                template: '<div>aaaa</div>'
+            }
+        },
+    ]
+});
 
 const app = new Vue({
     el: '#app',
