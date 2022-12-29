@@ -15,7 +15,10 @@
     <title>{{ config('app.name', 'Vue Laravel SPA') }}</title>
 
     <!-- Styles -->
+    {{-- bootstrap --}}
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+    {{-- original --}}
+    <link href="{{ mix('/css/style.css') }}" rel="stylesheet">
 </head>
 <body>
 <div id="app">
