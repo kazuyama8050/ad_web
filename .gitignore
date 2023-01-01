@@ -1,9 +1,12 @@
 /node_modules
 /public/hot
 /public/storage
+public/mix-manifest.json
 /storage/*.key
 /vendor
 .env
+.env.example
+.editorconfig
 .env.backup
 .phpunit.result.cache
 docker-compose.override.yml

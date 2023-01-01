@@ -43,6 +43,15 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
+        'sqlite_testing' => [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_PERSISTENT => false,
+            ]
+        ],
+
         'mysql' => [
             'driver' => 'mysql',
             // 'url' => env('DATABASE_URL'),
@@ -51,6 +60,26 @@ return [
             'database' => env('DB_DATABASE'),
             'username' => env('DB_USERNAME'),
             'password' => env('DB_PASSWORD'),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
+        'localhost' => [
+            'driver' => 'mysql',
+            // 'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_TEST'),
+            // 'port' => env('DB_PORT_TEST'),
+            'database' => env('DB_DATABASE_TEST'),
+            'username' => env('DB_USERNAME_TEST'),
+            'password' => env('DB_PASSWORD_TEST'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

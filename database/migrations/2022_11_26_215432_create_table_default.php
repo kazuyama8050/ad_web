@@ -20,10 +20,10 @@ class CreateTableDefault extends Migration
             $table->string('last_name')->nullable(false);
             $table->string('email')->nullable(false);
             $table->string('phone')->nullable(false);
-            $table->string('genre')->nullable(false);
+            $table->string('category')->nullable(false);
             $table->string('site_domein')->nullable(false);
             $table->smallInteger('review_flag')->nullable(false);  //未審査：0、審査OK：1、審査NG：2
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
 
         //アフィリエイター
@@ -45,7 +45,7 @@ class CreateTableDefault extends Migration
                   ->onDelete('cascade');
             $table->smallInteger('is_stopped')->nullable(false);  //アカウント運用中：0、アカウント停止中：1
             $table->smallInteger('is_retire')->nullable(false);  //未退会：0、退会済み：1
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
         
         //アフィリエイターお金周り
@@ -59,7 +59,7 @@ class CreateTableDefault extends Migration
             $table->string('bank_name')->nullable(false);
             $table->string('bank_number')->nullable(false);
             $table->string('bank_apply_name')->nullable(false);
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
         
         //アフィリエイター利用明細
@@ -74,7 +74,7 @@ class CreateTableDefault extends Migration
             $table->longText('texts')->nullable();
             $table->integer('balance')->nullable(false);  //この時点の残高
             $table->integer('price')->nullable(false);  //動いた金額
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
 
         //広告主
@@ -91,7 +91,7 @@ class CreateTableDefault extends Migration
             $table->string('manager_phone')->nullable(false);
             $table->smallInteger('is_stopped')->nullable(false);  //アカウント運用中：0、アカウント停止中：1
             $table->smallInteger('is_retire')->nullable(false);  //未退会：0、退会済み：1
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
 
         //広告主　お金周り
@@ -105,7 +105,7 @@ class CreateTableDefault extends Migration
             $table->string('bank_name')->nullable(false);
             $table->string('bank_number')->nullable(false);
             $table->string('bank_apply_name')->nullable(false);
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
 
         //広告主利用明細
@@ -120,7 +120,7 @@ class CreateTableDefault extends Migration
             $table->longText('texts')->nullable();
             $table->integer('balance')->nullable(false);  //この時点の残高
             $table->integer('price')->nullable(false);  //動いた金額
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
 
         //管理者
@@ -129,14 +129,14 @@ class CreateTableDefault extends Migration
             $table->string('password')->nullable(false);
             $table->string('email')->nullable(false);
             $table->smallInteger('authority')->nullable(false);
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
 
         //管理者権限
         Schema::create('authorities', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable(false);
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
 
         //カテゴリ
@@ -147,7 +147,7 @@ class CreateTableDefault extends Migration
             $table->smallInteger('parent_id')->nullable(false);  //最上位階層の場合は0
             $table->integer('floor_price')->nullable();
             $table->float('average_bid_price')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
 
         //表示広告テンプレート
@@ -156,7 +156,7 @@ class CreateTableDefault extends Migration
             $table->string('url')->nullable(false);
             $table->longText('text')->nullable(false);
             $table->string('image_path')->nullable(false);
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
 
         //広告情報
@@ -174,7 +174,7 @@ class CreateTableDefault extends Migration
             $table->integer('bid_price')->nullable(false);
             $table->smallInteger('is_stopped')->nullable(false);  //配信中：0、配信停止中：1
             $table->smallInteger('review_flag')->nullable(false);  //広告未審査：0、広告審査OK：1、広告審査NG：2
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
 
         //アフィリエイターと管理者のメール管理
@@ -189,7 +189,7 @@ class CreateTableDefault extends Migration
             $table->smallInteger('from')->nullable(false);  //admin or user
             $table->dateTime('last_message_datetime')->nullable();
             $table->smallInteger('is_read')->nullable(false);  //未読：0、既読：1
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
 
         //広告主と管理者のメール管理
@@ -204,7 +204,7 @@ class CreateTableDefault extends Migration
             $table->smallInteger('from')->nullable(false);    //admin or advertiser
             $table->dateTime('last_message_datetime')->nullable();
             $table->smallInteger('is_read')->nullable(false);  //未読：0、既読：1
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 
@@ -215,6 +215,7 @@ class CreateTableDefault extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('user_examinations');
         Schema::dropIfExists('users');
         Schema::dropIfExists('user_bills');
@@ -229,5 +230,6 @@ class CreateTableDefault extends Migration
         Schema::dropIfExists('advertisements');
         Schema::dropIfExists('user_messages');
         Schema::dropIfExists('advertiser_messages');
+        Schema::enableForeignKeyConstraints();
     }
 }

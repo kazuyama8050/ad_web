@@ -10821,3 +10821,19 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+/* ページタイトル */
+.page-title {
+  padding: 1rem 2rem;
+  border-left: 4px solid #000;
+  margin-bottom: 2.5%;
+}
+
+.hissu {
+  margin-left: 10px;
+  font-size: small;
+  color: red;
+}
+
+.container {
+  margin-bottom: 5%;
+}
