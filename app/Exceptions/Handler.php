@@ -38,4 +38,13 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    protected function convertExceptionToArray(Throwable $e)
+    {
+        return [
+            'message' => $e->getMessage(),
+            'exception' => get_class($e),
+            'status_code' => $this->isHttpException($e) ? $e->getStatusCode() : 500,
+        ];
+    }
 }
