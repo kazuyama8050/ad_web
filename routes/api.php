@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TaskController;
+use App\Http\Controllers\Api\TaskController;
+use App\Http\Controllers\Api\Category\GetFirstLevelCategoriesController;
+use App\Http\Controllers\Api\Deliveler\RegisterApplyFormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/test', [TaskController::class, 'getTest']);
+
+Route::get('/first-level-categories', [GetFirstLevelCategoriesController::class, 'get']);
+Route::post('register-deliveler-form', [RegisterApplyFormController::class, 'create']);
