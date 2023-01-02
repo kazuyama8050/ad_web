@@ -5,9 +5,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserExamination extends Model
 {
-    const MaxNameLength = 30;
-    const EmailPattern = "/^[a-zA-Z0-9!#\$%&`\+\*\-\/\^\{\}_\.]+@[a-zA-Z0-9!#\$%&`\+\*\-\/\^\{\}_\.]+\.[a-zA-Z0-9!#\$%&`\+\*\-\/\^\{\}_\.]+$/";
-    const PhonePattern = "/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/";
+    const MAX_NAME_LENGTH = 30;
+    const EMAIL_PATTERN = "/^[a-zA-Z0-9!#\$%&`\+\*\-\/\^\{\}_\.]+@[a-zA-Z0-9!#\$%&`\+\*\-\/\^\{\}_\.]+\.[a-zA-Z0-9!#\$%&`\+\*\-\/\^\{\}_\.]+$/";
+    const PHONE_PATTERN = "/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/";
     const REVIEW_BEFORE = 0;
     const REVIEW_OK = 1;
     const REVIEW_NG = 2;

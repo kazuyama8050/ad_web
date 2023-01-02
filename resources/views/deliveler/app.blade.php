@@ -21,7 +21,7 @@
 <body>
 <div id="app">
     
-    @if ($lastUri !== 'login')
+    @if ($lastUri !== 'login' && $lastUri !== 'register')
         <header-component></header-component>
     @endif
 

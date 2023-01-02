@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import HeaderComponent from "./components/deliveler/HeaderComponent";
 import TaskListComponent from "./components/TaskListComponent";
 import DelivelerLogin from "./views/deliveler/LoginView";
+import DelivelerRegister from "./views/deliveler/RegisterView";
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.bundle.min.js"
 /**
@@ -47,6 +48,11 @@ window.Vue = require('vue').default;const router = new Router({
             path: '/tasks',
             name: 'task.list',
             component: TaskListComponent
+        },
+        {
+            path: DELIVELER_ROOT_PATH + '/register',
+            name: 'deliveler.register',
+            component: DelivelerRegister
         },
         {
             path: DELIVELER_ROOT_PATH + '/login',
