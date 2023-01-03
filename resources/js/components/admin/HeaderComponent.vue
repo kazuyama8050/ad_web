@@ -2,20 +2,20 @@
     <div class="container-fluid bg-dark mb-3">
         <div class="container">
             <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3">
-                <a class="navbar-brand" href="/home">DELIVELER</a>
+                <a class="navbar-brand" href="/home">ADMIN</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">広告</a>
+                            <a class="nav-link" href="advertise">広告</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">データ一覧</a>
+                            <a class="nav-link" href="deliveler">アフィリエイター</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">レポート</a>
+                            <a class="nav-link" href="advertiser">広告主</a>
                         </li>
                     </ul>
                 </div>

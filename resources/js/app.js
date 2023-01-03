@@ -1,11 +1,28 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import HeaderComponent from "./components/deliveler/HeaderComponent";
 import TaskListComponent from "./components/TaskListComponent";
-import DelivelerLogin from "./views/deliveler/LoginView";
-import DelivelerRegister from "./views/deliveler/RegisterView";
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.bundle.min.js"
+
+/**
+ * deliveler
+ */
+import DelivelerLogin from "./views/deliveler/LoginView";
+import DelivelerRegister from "./views/deliveler/RegisterView";
+import HeaderComponent from "./components/deliveler/HeaderComponent";
+
+/**
+ * advertiser
+ */
+// import AdvertiserHeaderComponent from "./components/advertiser/HeaderComponent";
+
+/**
+ * admin
+ */
+import AdminHeaderComponent from "./components/admin/HeaderComponent";
+import AdminLogin from "./views/admin/LoginView";
+import AdminHome from "./views/admin/HomeView";
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -33,6 +50,7 @@ const ADMIN_ROOT_PATH="/admin"
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 Vue.component('header-component', HeaderComponent);
+Vue.component('admin-header-component', AdminHeaderComponent);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -44,6 +62,7 @@ Vue.use(Router);
 window.Vue = require('vue').default;const router = new Router({
     mode: 'history',
     routes: [
+        //アフィリエイター画面
         {
             path: '/tasks',
             name: 'task.list',
@@ -62,6 +81,24 @@ window.Vue = require('vue').default;const router = new Router({
         {
             path: DELIVELER_ROOT_PATH + '/advertise',
             name: 'advertise.list',
+            component: {
+                template: '<div>aaaa</div>'
+            }
+        },
+        //管理画面
+        {
+            path: ADMIN_ROOT_PATH + '/login',
+            name: 'admin.login',
+            component: AdminLogin,
+        },
+        {
+            path: ADMIN_ROOT_PATH + '/home',
+            name: 'admin.home',
+            component: AdminHome,
+        },
+        {
+            path: ADMIN_ROOT_PATH + '/advertise',
+            name: 'admin.list',
             component: {
                 template: '<div>aaaa</div>'
             }

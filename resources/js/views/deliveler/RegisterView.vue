@@ -29,8 +29,7 @@
                     <option v-for="(message) in categories" :value="message.name">{{ message.name }}</option>
                 </select>
             </div>
-            <!-- <FormButtonComponent inputValue="確認" /> -->
-            <p>{{ responseMessage }}</p>
+            <p v-if="responseMessage" class="alert alert-primary" role="alert">{{ responseMessage }}</p>
             <div class="d-grid gap-2 col-6 mx-auto pt-xl-5">
                 <button class="btn btn-primary" type="submit">確認</button>
             </div>

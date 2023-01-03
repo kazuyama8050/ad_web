@@ -21,4 +21,12 @@ Route::get($_ENV['DELIVELER_ROOT_PATH'].'/{any}', function() {
     return view($_ENV['DELIVELER_ROOT_PATH'].'/app');
 })->where('any', '.*');
 
+Route::get($_ENV['ADVERTISER_ROOT_PATH'].'/{any}', function() {
+    return view($_ENV['ADVERTISER_ROOT_PATH'].'/app');
+})->where('any', '.*');
+
+Route::get($_ENV['ADMIN_ROOT_PATH'].'/{any}', function() {
+    return view($_ENV['ADMIN_ROOT_PATH'].'/app');
+})->where('any', '.*');
+
 // Route::get('/tasks', [Controller::class, 'getTest']);
