@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Services\CategoryService;
 
-class GetFirstLevelCategoriesController extends Controller
+class FirstLevelCategoriesController extends Controller
 {
     /** @var CategoryService */
     private $categoryService;
