@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\Deliveler\RegisterApplyFormController;
   * 管理者
   */
 use App\Http\Controllers\Api\Admin\DelivelerNoRegisteredController;
+use App\Http\Controllers\Api\Admin\AdminDelivelerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,3 +52,4 @@ Route::post('register-deliveler-form', [RegisterApplyFormController::class, 'cre
 Route::get('/deliveler-no-registered', [DelivelerNoRegisteredController::class, 'get']);
 Route::post('approve-deliveler-form', [DelivelerNoRegisteredController::class, 'approve']);
 Route::post('disapprove-deliveler-form', [DelivelerNoRegisteredController::class, 'disapprove']);
+Route::get('all-deliveler', [AdminDelivelerController::class, 'getAll']);

@@ -72,6 +72,8 @@ class ApproveDelivelerNoRegisteredTest extends TestCase
         $reviewFlag = 1;
         
         $expectedResponse = [
+            'id' => 1,
+            'examinationId' => 1,
             'lastName' => 'lastName1',
             'firstName' => 'firstName1',
             'email' => 'validate1@email.com',

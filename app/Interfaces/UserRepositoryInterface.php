@@ -5,6 +5,13 @@ use App\Models\User\User;
 
 interface UserRepositoryInterface
 {
+
+    /**
+     * Summary of getAll
+     * @return array(User)
+     */
+    public function getAll();
+
     /**
      * Summary of getById
      * @param mixed $userId

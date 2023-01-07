@@ -31,6 +31,16 @@ class UserService
 
     }
 
+    public function getAllDeliveler() {
+        $users = $this->userRepository->getAll();
+        $userList = [];
+        foreach ($users as $user) {
+            $userList[] = $this->createResponse($user);
+        }
+
+        return $userList;
+    }
+
     public function getById($userId) {
         $user = $this->userRepository->getById($userId);
         $userList = $this->createResponse($user);
@@ -47,6 +57,7 @@ class UserService
     }
 
     private function createResponse(User $user) {
+        $userList['id'] = $user->getId();
         $userList['examinationId'] = $user->getExaminationId();
         $userList['lastName'] = $user->GetLastName();
         $userList['firstName'] = $user->getFirstName();
