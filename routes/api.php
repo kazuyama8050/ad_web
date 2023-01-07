@@ -3,8 +3,21 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TaskController;
-use App\Http\Controllers\Api\Category\GetFirstLevelCategoriesController;
+
+/**
+ * アフィリエイター
+ */
+use App\Http\Controllers\Api\Category\FirstLevelCategoriesController;
 use App\Http\Controllers\Api\Deliveler\RegisterApplyFormController;
+
+/**
+ * 広告主
+ */
+
+ /**
+  * 管理者
+  */
+use App\Http\Controllers\Api\Admin\DelivelerNoRegisteredController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +35,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/test', [TaskController::class, 'getTest']);
-
-Route::get('/first-level-categories', [GetFirstLevelCategoriesController::class, 'get']);
+/**
+ * アフィリエイター
+ */
+Route::get('/first-level-categories', [FirstLevelCategoriesController::class, 'get']);
 Route::post('register-deliveler-form', [RegisterApplyFormController::class, 'create']);
+
+/**
+ * 広告主
+ */
+
+ /**
+  * 管理者
+  */
+Route::get('/deliveler-no-registered', [DelivelerNoRegisteredController::class, 'get']);
+Route::post('approve-deliveler-form', [DelivelerNoRegisteredController::class, 'approve']);
+Route::post('disapprove-deliveler-form', [DelivelerNoRegisteredController::class, 'disapprove']);

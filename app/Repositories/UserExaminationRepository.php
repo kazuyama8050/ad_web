@@ -27,7 +27,16 @@ class UserExaminationRepository implements UserExaminationRepositoryInterface
         $userExaminations = DB::table('user_examinations')->get();
         $userExaminationList = array();
         foreach ($userExaminations as $userExamination) {
-            $userExaminationList[] = $this->rowMapper($userExaminations);
+            $userExaminationList[] = $this->rowMapper($userExamination);
+        }
+        return $userExaminationList;
+    }
+
+    public function getNoRegistered() {
+        $userExaminations = DB::table('user_examinations')->where('review_flag', 0)->get();
+        $userExaminationList = array();
+        foreach ($userExaminations as $userExamination) {
+            $userExaminationList[] = $this->rowMapper($userExamination);
         }
         return $userExaminationList;
     }
@@ -60,6 +69,23 @@ class UserExaminationRepository implements UserExaminationRepositoryInterface
         ]);
 
         return $id;
+    }
+
+    public function approve($userExaminationId) {
+        DB::table('user_examinations')
+            ->where('id', $userExaminationId)
+            ->update(['review_flag' => UserExamination::REVIEW_OK]);
+
+
+        return;
+    }
+
+    public function disapprove($userExaminationId) {
+        DB::table('user_examinations')
+            ->where('id', $userExaminationId)
+            ->update(['review_flag' => UserExamination::REVIEW_NG]);
+
+        return;
     }
 
     private function rowMapper($row) {

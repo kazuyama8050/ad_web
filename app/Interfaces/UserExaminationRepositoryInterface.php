@@ -18,6 +18,12 @@ interface UserExaminationRepositoryInterface
     public function getAll();
 
     /**
+     * Summary of getNoRegistered
+     * @return array(UserExamination)
+     */
+    public function getNoRegistered();
+
+    /**
      * Summary of validateEmail
      * @param mixed $email
      * @return int
@@ -42,4 +48,18 @@ interface UserExaminationRepositoryInterface
      * @return $id
      */
     public function create($lastName, $firstName, $phone, $email, $siteDomein, $category);
+
+    /**
+     * Summary of approve
+     * @param mixed $userExaminationId
+     * @return void
+     */
+    public function approve($userExaminationId);
+
+    /**
+     * Summary of disapprove
+     * @param mixed $userExaminationId
+     * @return void
+     */
+    public function disapprove($userExaminationId);
 }
