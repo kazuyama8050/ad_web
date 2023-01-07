@@ -9,6 +9,7 @@ use App\Validation\UserExaminationValidation;
 use App\Models\User\User;
 use App\Models\UserExamination\UserExamination;
 use \Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Mail;
 
 class UserExaminationService
 {
@@ -97,9 +98,11 @@ class UserExaminationService
                 $userExamination->getEmail(),
             );
 
-            DB::commit();
-
             //メール処理
+            $judge = 'approve';
+            $this->sendJudgeMail($userExamination, $judge, $userData["password"]);
+
+            DB::commit();
 
             return $userData["userId"];
         } catch (\Throwable $e) {
@@ -117,16 +120,33 @@ class UserExaminationService
             DB::beginTransaction();
             $this->userExaminationRepository->disapprove($userExaminationId);
 
+            //メール処理
+            $judge = 'disapprove';
+            $this->sendJudgeMail($userExamination, $judge, null);
+
             $userExamination = $this->getById($userExaminationId);
             DB::commit();
 
-            //メール処理
+            
 
             return $userExamination;
 
         } catch (\Throwable $e) {
             DB::rollBack();
         }
+    }
+
+    private function sendJudgeMail(UserExamination $userExamination, $judge, $password) {
+        $email = $userExamination->getEmail();
+        Mail::send('mail.admin.judgeDeliveler', [
+            'lastName' => $userExamination->getLastname(),
+            'firstName' => $userExamination->getFirstName(),
+            'judge' => $judge,
+            'password' => $password,
+        ], function ($message) use ($email) {
+            $message->to($email)
+                ->subject('アフィリエイト審査結果');
+        });
     }
 
     private function createResponse($userExamination) {
