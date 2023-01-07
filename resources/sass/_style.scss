@@ -102,3 +102,8 @@
 .login input[type="submit"]:focus {
   border-color: #05a;
 }
+
+// テーブル 横スクロール
+.table-wrap {
+  overflow-x: scroll;
+}

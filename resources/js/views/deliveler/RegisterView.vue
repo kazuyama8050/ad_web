@@ -1,6 +1,6 @@
 <template>
     <div class="container dummy-header">
-        <div class="page-title">会員登録フォーム</div>
+        <PageTitleComponent title="会員登録フォーム"></PageTitleComponent>
         <form v-on:submit.prevent="submit" v-if="done == false">
             <div class="mb-3">
                 <label for="lastName" class="form-label">苗字<span class="hissu">必須</span></label>
@@ -43,6 +43,7 @@ import FormTextComponent from "../../components/form/FormTextComponent.vue";
 import FormSelectBoxComponent from "../../components/form/FormSelectBoxComponent.vue";
 import FormRadioBoxComponent from "../../components/form/FormRadioBoxComponent.vue";
 import FormButtonComponent from "../../components/form/FormButtonComponent.vue";
+import PageTitleComponent from "../../components/common/PageTitleComponent.vue";
 
 export default {
     name: "DelivelerRegister",
@@ -51,6 +52,7 @@ export default {
         FormSelectBoxComponent,
         FormRadioBoxComponent,
         FormButtonComponent,
+        PageTitleComponent,
     },
     data: function() {
         return {
