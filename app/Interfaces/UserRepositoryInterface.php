@@ -19,6 +19,13 @@ interface UserRepositoryInterface
      */
     public function getById($userId);
 
+    /**
+     * Summary of getByEmail
+     * @param mixed $email
+     * @return User
+     */
+    public function getByEmail($email);
+
 
     /**
      * Summary of create

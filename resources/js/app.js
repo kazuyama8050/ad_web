@@ -8,6 +8,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js"
  * deliveler
  */
 import DelivelerLogin from "./views/deliveler/LoginView";
+import DelivelerHome from "./views/deliveler/HomeView";
 import DelivelerRegister from "./views/deliveler/RegisterView";
 import HeaderComponent from "./components/deliveler/HeaderComponent";
 
@@ -22,6 +23,8 @@ import HeaderComponent from "./components/deliveler/HeaderComponent";
 import AdminHeaderComponent from "./components/admin/HeaderComponent";
 import AdminLogin from "./views/admin/LoginView";
 import AdminHome from "./views/admin/HomeView";
+import AdminDeliveler from "./views/admin/deliveler/DelivelerView";
+import AdminNoRegistered from "./views/admin/deliveler/NoRegisteredView";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -79,6 +82,11 @@ window.Vue = require('vue').default;const router = new Router({
             component: DelivelerLogin
         },
         {
+            path: DELIVELER_ROOT_PATH + '/home',
+            name: 'deliveler.home',
+            component: DelivelerHome
+        },
+        {
             path: DELIVELER_ROOT_PATH + '/advertise',
             name: 'advertise.list',
             component: {
@@ -95,6 +103,16 @@ window.Vue = require('vue').default;const router = new Router({
             path: ADMIN_ROOT_PATH + '/home',
             name: 'admin.home',
             component: AdminHome,
+        },
+        {
+            path: ADMIN_ROOT_PATH + '/deliveler',
+            name: 'admin.deliveler',
+            component: AdminDeliveler,
+        },
+        {
+            path: ADMIN_ROOT_PATH + '/deliveler/no-registered',
+            name: 'admin.noRegistered',
+            component: AdminNoRegistered,
         },
         {
             path: ADMIN_ROOT_PATH + '/advertise',

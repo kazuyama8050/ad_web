@@ -65,7 +65,11 @@ export default {
             axios.get('/api/deliveler-no-registered')
                 .then((res) => {
                     this.delivelers = res.data;
+                })
+                .catch(error =>{
+                    this.responseMessage = error.response.data.message;
                 });
+                
         },
         approve: function(userExaminationId) {
             axios.post('/api/approve-deliveler-form', {

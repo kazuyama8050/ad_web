@@ -1,27 +1,58 @@
 <?php
 namespace App\Services;
 use App\Repositories\UserRepository;
+use App\Validation\UserValidation;
 use App\Models\User\User;
 use App\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 use \Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
     /**
-     * Summary of __construct
      * @param UserRepository $userRepository
      */
     private $userRepository;
 
-    public function __construct(UserRepository $userRepository) {
+    /**
+     * @param UserValidation $userValidation
+     */
+    private $userValidation;
+
+    public function __construct(UserRepository $userRepository, UserValidation $userValidation) {
         $this->userRepository = $userRepository;
+        $this->userValidation = $userValidation;
+    }
+
+    public function loginCheck() {
+        if (empty(session('user'))) {
+            header("Location:/deliveler/login");
+        }
+        return;
+    }
+
+    public function login($email, $password) {
+        if (empty($email)){abort(response()->json(['message' => 'メールアドレスは必須です。'], Response::HTTP_NOT_FOUND));}
+        if (empty($password)){abort(response()->json(['message' => 'パスワードは必須です。'], Response::HTTP_NOT_FOUND));}
+
+        $user = $this->userRepository->getByEmail($email);
+        if (empty($user)){abort(response()->json(['message' => '登録されていないメールアドレスです。'], Response::HTTP_BAD_REQUEST));}
+
+        $this->userValidation->validateIsStopped($user);
+        $this->userValidation->validateIsRetire($user);
+
+        $passwordHash = $user->getPassword();
+        if (!Hash::check($password, $passwordHash)){abort(response()->json(['message' => 'パスワードが一致しません。'], Response::HTTP_BAD_REQUEST));}
+
+        session(['user' => $user]);
+        return;
     }
 
     public function createUser($examinationId, $lastName, $firstName, $phone, $email){
         // 仮パスワード生成
         $password = $this->makeRandStr();
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        $passwordHash = Hash::make($password);
         $userId = $this->userRepository->create($examinationId, $passwordHash, $lastName, $firstName, $phone, $email);
 
         return [

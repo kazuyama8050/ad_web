@@ -21,20 +21,39 @@ class UserRepository implements UserRepositoryInterface
         return $userId;
     }
 
+    public function getAll() {
+        $users = DB::table('users')->where(['is_stopped'=>User::NO_STOPPED, 'is_retire'=>User::NO_RETIRE])->get();
+        $userList = [];
+        foreach ($users as $user) {
+            $userList[] = $this->rowMapper($user);
+        }
+        return $userList;
+    }
+
     public function getById($userId) {
         $user = DB::table('users')->where('id', $userId)->first();
         return $this->rowMapper($user);
     }
 
-    private function rowMapper($row) {
+    public function getByEmail($email) {
+        $user = DB::table('users')->where('email', $email)->first();
+        return $this->rowMapper($user, true);
+    }
+
+    private function rowMapper($row, $pass = false) {
         if (empty($row)) {
             return null;
+        }
+
+        $password = null;
+        if ($pass) {
+            $password = $row->password;
         }
 
         return new User(
             (int) $row->id,
             (int) $row->examination_id,
-            null,
+            $password,
             $row->last_name,
             $row->first_name,
             $row->phone,

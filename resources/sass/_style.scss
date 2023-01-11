@@ -74,6 +74,18 @@
   font-size: 0.95em;
 }
 
+.login button {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
 .login input[type="email"],
 .login input[type="password"] {
   background: #fff;
@@ -100,6 +112,22 @@
 
 /* Buttons' focus effect */
 .login input[type="submit"]:focus {
+  border-color: #05a;
+}
+
+.login button[type="submit"] {
+  background: #28d;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.login button[type="submit"]:hover {
+  background: #17c;
+}
+
+/* Buttons' focus effect */
+.login button[type="submit"]:focus {
   border-color: #05a;
 }
 

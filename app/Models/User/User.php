@@ -105,4 +105,12 @@ class User extends Model
     public function getIsRetire() {
         return $this->isRetire;
     }
+
+    public function isUserStopped() {
+        return $this->isStopped == self::IS_STOPPED;
+    }
+
+    public function isUserRetire() {
+        return $this->isRetire == self::IS_RETIRE;
+    }
 }
