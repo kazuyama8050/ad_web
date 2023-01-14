@@ -9,4 +9,9 @@ interface CategoryRepositoryInterface
      * @return array(Category)
      */
     public function getFirstLevelCatgories();
+    /**
+     * Summary of getAllCategories
+     * @return array(Category)
+     */
+    public function getAllCategories();
 }

@@ -24,13 +24,36 @@ class CategoryService {
         $firstLevelCategories = $this->categoryRepository->getFirstLevelCatgories();
         $firstLevelCategoryList = [];
         foreach ($firstLevelCategories as $firstLevelCategory) {
-            $firstLevelCategoryList[$firstLevelCategory->getId()]['id'] = $firstLevelCategory->getId();
-            $firstLevelCategoryList[$firstLevelCategory->getId()]['name'] = $firstLevelCategory->getName();
-            $firstLevelCategoryList[$firstLevelCategory->getId()]['level'] = $firstLevelCategory->getLevel();
-            $firstLevelCategoryList[$firstLevelCategory->getId()]['parentId'] = $firstLevelCategory->getParentId();
-            $firstLevelCategoryList[$firstLevelCategory->getId()]['floorPrice'] = $firstLevelCategory->getFloorPrice();
-            $firstLevelCategoryList[$firstLevelCategory->getId()]['averageBidPrice'] = $firstLevelCategory->getAverageBidPrice();
+            $firstLevelCategoryList[$firstLevelCategory->getid()] = $this->createResponse($firstLevelCategory);
         }
         return $firstLevelCategoryList;
+    }
+
+    public function getAllCategories() {
+        $allCategories = $this->categoryRepository->getAllCategories();
+        $allCategoryList = [];
+        foreach ($allCategories as $category) {
+            if ($category->isLevel1()) {
+                $allCategoryList['level1'][$category->getid()] = $this->createResponse($category);
+            } else if ($category->isLevel2()) {
+                $allCategoryList['level2'][$category->getid()] = $this->createResponse($category);
+            } else if ($category->isLevel3()) {
+                $allCategoryList['level3'][$category->getid()] = $this->createResponse($category);
+            }
+            
+        }
+        return $allCategoryList;
+    }
+
+    private function createResponse(Category $category) {
+        $categoryList = [];
+        $categoryList['id'] = $category->getId();
+        $categoryList['name'] = $category->getName();
+        $categoryList['level'] = $category->getLevel();
+        $categoryList['parentId'] = $category->getParentId();
+        $categoryList['floorPrice'] = $category->getFloorPrice();
+        $categoryList['averageBidPrice'] = $category->getAverageBidPrice();
+
+        return $categoryList;
     }
 }

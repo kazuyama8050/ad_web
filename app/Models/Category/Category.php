@@ -45,6 +45,18 @@ class Category extends Model
         return $this->level;
     }
 
+    public function isLevel1() {
+        return $this->level == 1;
+    }
+
+    public function isLevel2() {
+        return $this->level == 2;
+    }
+
+    public function isLevel3() {
+        return $this->level == 3;
+    }
+
     public function getParentId() {
         return $this->parentId;
     }

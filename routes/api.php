@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\Deliveler\LoginDelivelerController;
 use App\Http\Controllers\Api\Category\FirstLevelCategoriesController;
 use App\Http\Controllers\Api\Deliveler\RegisterApplyFormController;
+use App\Http\Controllers\Api\Deliveler\CategoriesController as DelivelerCategoriesController;
 
 /**
  * 広告主
@@ -43,7 +44,8 @@ Route::get('/test', [TaskController::class, 'getTest']);
 Route::post('/login-deliveler', [LoginDelivelerController::class, 'login']);
 Route::get('/login-check-deliveler', [LoginDelivelerController::class, 'loginCheck']);
 Route::get('/first-level-categories', [FirstLevelCategoriesController::class, 'get']);
-Route::post('register-deliveler-form', [RegisterApplyFormController::class, 'create']);
+Route::post('/register-deliveler-form', [RegisterApplyFormController::class, 'create']);
+Route::get('/all-categories', [DelivelerCategoriesController::class, 'getAll']);
 
 /**
  * 広告主

@@ -26,6 +26,15 @@ class CategoryRepository implements CategoryRepositoryInterface {
         }
         return $firstLevelCategoryList;
     }
+
+    public function getAllCategories() {
+        $allCategories = DB::table('categories')->get();
+        $categoryList = array();
+        foreach ($allCategories as $category) {
+            $categoryList[] = $this->rowMapper($category);
+        }
+        return $categoryList;
+    }
     
 
     /**
