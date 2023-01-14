@@ -10,7 +10,6 @@
             <p><input type="password" placeholder="Password" v-model="form.password" required></p>
             <p><button class="" type="submit">Log In</button></p>
         </form>
-        <a href="/deliveler/home">home</a>
     </div>
 </template>
 <script>
