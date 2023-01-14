@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\DelivelerAuthenticate;
+use App\Http\Middleware\DelivelerAuthenticateRedirector;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +21,7 @@ use App\Http\Middleware\DelivelerAuthenticate;
 
 Route::get($_ENV['DELIVELER_ROOT_PATH']."/login", function() {
     return view($_ENV['DELIVELER_ROOT_PATH'].'/app_no_header');
-});
+})->middleware(DelivelerAuthenticateRedirector::class);
 
 Route::get($_ENV['DELIVELER_ROOT_PATH'].'/register', function() {
     return view($_ENV['DELIVELER_ROOT_PATH'].'/app_no_header');

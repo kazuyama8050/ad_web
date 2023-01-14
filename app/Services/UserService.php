@@ -45,8 +45,7 @@ class UserService
         $passwordHash = $user->getPassword();
         if (!Hash::check($password, $passwordHash)){abort(response()->json(['message' => 'パスワードが一致しません。'], Response::HTTP_BAD_REQUEST));}
 
-        session(['user' => $user]);
-        return;
+        return $user;
     }
 
     public function createUser($examinationId, $lastName, $firstName, $phone, $email){

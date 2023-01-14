@@ -37,8 +37,8 @@ class LoginDelivelerTest extends TestCase
 
         $response->assertStatus($statusCode);
         if ($statusCode == 200) {
-            $sessionUser = session()->get('user');
-            $this->assertEquals($requestBody['email'], $sessionUser->getEmail());
+            $sessionEmail = session()->get('deliveler');
+            $this->assertEquals($requestBody['email'], $sessionEmail);
         }
 
         $response->assertJsonFragment($expectedResponse);

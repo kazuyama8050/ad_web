@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Deliveler;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\UserService;
+use Illuminate\Support\Facades\Route;
 
 class LoginDelivelerController extends Controller
 {
@@ -22,12 +23,19 @@ class LoginDelivelerController extends Controller
         $email = isset($requestBody["email"]) ? $requestBody["email"] : null;
         $password = isset($requestBody["password"]) ? $requestBody["password"] : null;
 
-        $this->userService->login(
+        $user = $this->userService->login(
             $email,
             $password,
         );
 
+        $request->session()->put('deliveler', $user->getEmail());
+
         return json_encode(['message' => 'OK']);
 
+    }
+
+    public function loginCheck() {
+        $this->userService->loginCheck();
+        return json_encode(['message' => 'OK']);
     }
 }

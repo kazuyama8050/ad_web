@@ -10,6 +10,7 @@
             <p><input type="password" placeholder="Password" v-model="form.password" required></p>
             <p><button class="" type="submit">Log In</button></p>
         </form>
+        <a href="/deliveler/home">home</a>
     </div>
 </template>
 <script>
@@ -36,8 +37,11 @@ export default {
             })
             .then((res) => {
                 if (res.status == 200) {
-                    this.responseMessage = 'ログインしました。'
-                    this.$router.push('home')
+                    // this.Redirected();
+                    // this.responseMessage = 'ログインしました。'
+                    // this.$router.push('home')
+                    // location.assign('home');
+                    location.reload();
                 } else {
                     this.responseMessage = '予期せぬエラーが発生しました。'
                 }
@@ -45,6 +49,9 @@ export default {
             .catch(error =>{
                 this.responseMessage = error.response.data.message;
             });
+        },
+        Redirected() {
+            this.$router.push('home');
         },
     },
 }
