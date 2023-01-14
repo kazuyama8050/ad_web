@@ -18,7 +18,7 @@ class DelivelerAuthenticateRedirector extends Middleware
     public function handle($request, Closure $next)
     {
         $path = explode('/', $request->path());
-        if (end($path) == "login" && $request->session()->exists('deliveler')) {
+        if (end($path) == "login" && $request->session()->exists('delivelerId')) {
             http_response_code(Response::HTTP_FOUND);
             return redirect($_ENV['DELIVELER_ROOT_PATH']."/home");
         }

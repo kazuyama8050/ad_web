@@ -28,7 +28,8 @@ class LoginDelivelerController extends Controller
             $password,
         );
 
-        $request->session()->put('deliveler', $user->getEmail());
+        $request->session()->put('delivelerEmail', $user->getEmail());
+        $request->session()->put('delivelerId', $user->getId());
 
         return json_encode(['message' => 'OK']);
 

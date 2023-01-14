@@ -17,7 +17,7 @@ class DelivelerAuthenticate extends Middleware
      */
     public function handle($request, Closure $next)
     {
-        if (!$request->session()->exists('deliveler')) {
+        if (!$request->session()->exists('delivelerId')) {
             session()->flush();
             http_response_code(Response::HTTP_UNAUTHORIZED);
             return redirect($_ENV['DELIVELER_ROOT_PATH']."/login");
