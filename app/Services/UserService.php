@@ -27,7 +27,7 @@ class UserService
 
     public function loginCheck() {
         if (empty(session('user'))) {
-            header("Location:/deliveler/login");
+            header("Location:/user/login");
         }
         return;
     }
@@ -61,7 +61,7 @@ class UserService
 
     }
 
-    public function getAllDeliveler() {
+    public function getAllUser() {
         $users = $this->userRepository->getAll();
         $userList = [];
         foreach ($users as $user) {

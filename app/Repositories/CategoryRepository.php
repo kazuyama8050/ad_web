@@ -12,12 +12,14 @@ class CategoryRepository implements CategoryRepositoryInterface {
         'parent_id',
         'floor_price',
         'average_bid_price',
+        'is_delete',
     ];
 
     public function getFirstLevelCatgories() {
         $columns = join(',', $this->categoryColumns);
         $firstLevelCategories = DB::table('categories')
             ->where('level', 1)
+            ->where('is_delete', 0)
             ->get();
         
         $firstLevelCategoryList = array();
@@ -28,7 +30,7 @@ class CategoryRepository implements CategoryRepositoryInterface {
     }
 
     public function getAllCategories() {
-        $allCategories = DB::table('categories')->get();
+        $allCategories = DB::table('categories')->where('is_delete', 0)->get();
         $categoryList = array();
         foreach ($allCategories as $category) {
             $categoryList[] = $this->rowMapper($category);
@@ -53,6 +55,7 @@ class CategoryRepository implements CategoryRepositoryInterface {
             (int) $row->parent_id,
             (int) $row->floor_price,
             $row->average_bid_price,
+            (int) $row->is_delete,
         );
     }
 }

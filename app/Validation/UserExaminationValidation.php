@@ -28,7 +28,7 @@ class UserExaminationValidation
         return true;
     }
 
-    public function validateJudgeDeliveler($userExamination) {
+    public function validateJudgeUser($userExamination) {
         if (empty($userExamination)){abort(response()->json(['message' => '存在しない仮登録IDです。'], Response::HTTP_BAD_REQUEST));}
         if (!$userExamination->isBeforeReview()){abort(response()->json(['message' => '審査済みです。'], Response::HTTP_BAD_REQUEST));}
 

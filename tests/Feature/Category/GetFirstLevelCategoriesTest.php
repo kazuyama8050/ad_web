@@ -32,6 +32,14 @@ class GetFirstLevelCategoriesTest extends TestCase
             'floor_price' => 24,
             'average_bid_price' => 34,
         ]);
+        DB::table('categories')->insert([
+            'name' => 'name_level1_delete',
+            'level' => 1,
+            'parent_id' => 1,
+            'floor_price' => 24,
+            'average_bid_price' => 34,
+            'is_delete' => 1,
+        ]);
         
     }
     /**

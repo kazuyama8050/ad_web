@@ -5,17 +5,19 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.bundle.min.js"
 
 /**
- * deliveler
+ * user
  */
-import DelivelerLogin from "./views/deliveler/LoginView";
-import DelivelerHome from "./views/deliveler/HomeView";
-import DelivelerRegister from "./views/deliveler/RegisterView";
-import HeaderComponent from "./components/deliveler/HeaderComponent";
+import UserLogin from "./views/user/LoginView";
+import UserHome from "./views/user/HomeView";
+import UserRegister from "./views/user/RegisterView";
+import HeaderComponent from "./components/user/HeaderComponent";
 
 /**
  * advertiser
  */
-// import AdvertiserHeaderComponent from "./components/advertiser/HeaderComponent";
+import AdvertiserTemplateCreate from "./views/advertiser/advertise/TemplateCreateView";
+
+
 
 /**
  * admin
@@ -23,8 +25,8 @@ import HeaderComponent from "./components/deliveler/HeaderComponent";
 import AdminHeaderComponent from "./components/admin/HeaderComponent";
 import AdminLogin from "./views/admin/LoginView";
 import AdminHome from "./views/admin/HomeView";
-import AdminDeliveler from "./views/admin/deliveler/DelivelerView";
-import AdminNoRegistered from "./views/admin/deliveler/NoRegisteredView";
+import AdminUser from "./views/admin/user/UserView";
+import AdminNoRegistered from "./views/admin/user/NoRegisteredView";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -34,7 +36,7 @@ import AdminNoRegistered from "./views/admin/deliveler/NoRegisteredView";
 
 require('./bootstrap');
 
-const DELIVELER_ROOT_PATH="/deliveler"
+const USER_ROOT_PATH="/user"
 const ADVERTISER_ROOT_PATH="/advertiser"
 const ADMIN_ROOT_PATH="/admin"
 
@@ -72,26 +74,32 @@ window.Vue = require('vue').default;const router = new Router({
             component: TaskListComponent
         },
         {
-            path: DELIVELER_ROOT_PATH + '/register',
-            name: 'deliveler.register',
-            component: DelivelerRegister
+            path: USER_ROOT_PATH + '/register',
+            name: 'user.register',
+            component: UserRegister
         },
         {
-            path: DELIVELER_ROOT_PATH + '/login',
-            name: 'deliveler.login',
-            component: DelivelerLogin
+            path: USER_ROOT_PATH + '/login',
+            name: 'user.login',
+            component: UserLogin
         },
         {
-            path: DELIVELER_ROOT_PATH + '/home',
-            name: 'deliveler.home',
-            component: DelivelerHome
+            path: USER_ROOT_PATH + '/home',
+            name: 'user.home',
+            component: UserHome
         },
         {
-            path: DELIVELER_ROOT_PATH + '/advertise',
+            path: USER_ROOT_PATH + '/advertise',
             name: 'advertise.list',
             component: {
                 template: '<div>aaaa</div>'
             }
+        },
+        //広告主
+        {
+            path: ADVERTISER_ROOT_PATH + '/template/create',
+            name: 'advertiser.template.create',
+            component: AdvertiserTemplateCreate
         },
         //管理画面
         {
@@ -105,12 +113,12 @@ window.Vue = require('vue').default;const router = new Router({
             component: AdminHome,
         },
         {
-            path: ADMIN_ROOT_PATH + '/deliveler',
-            name: 'admin.deliveler',
-            component: AdminDeliveler,
+            path: ADMIN_ROOT_PATH + '/user',
+            name: 'admin.user',
+            component: AdminUser,
         },
         {
-            path: ADMIN_ROOT_PATH + '/deliveler/no-registered',
+            path: ADMIN_ROOT_PATH + '/user/no-registered',
             name: 'admin.noRegistered',
             component: AdminNoRegistered,
         },

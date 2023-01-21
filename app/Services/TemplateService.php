@@ -25,7 +25,7 @@ class TemplateService {
         $this->templateValidation = $templateValidation;
     }
 
-    public function create($delivelerId, $url, $bannerImage, $bannerText) {
+    public function create($advertiserId, $url, $bannerImage, $bannerText) {
         if (empty($url)){abort(response()->json(['message' => '遷移先URLは必須項目です。'], Response::HTTP_BAD_REQUEST));}
         if (empty($bannerImage)){abort(response()->json(['message' => 'バナー画像は必須項目です。'], Response::HTTP_BAD_REQUEST));}
         if (empty($bannerText)){abort(response()->json(['message' => 'バナーテキストは必須項目です。'], Response::HTTP_BAD_REQUEST));}
@@ -38,10 +38,10 @@ class TemplateService {
         $mimeType = $bannerImage->extension();
         $timestamp = time();
 
-        $uploadFileName = "${delivelerId}-${timestamp}.${mimeType}";
+        $uploadFileName = "${advertiserId}-${timestamp}.${mimeType}";
 
         try {
-            $imagePath = $bannerImage->storeAs("public/uploads/advertisement/${delivelerId}", $uploadFileName);
+            $imagePath = $bannerImage->storeAs("public/uploads/advertisement/${advertiserId}", $uploadFileName);
             $imagePath = $this->changeViewFilePath($imagePath);
 
             $templateId = $this->templateRepository->create($url, $imagePath, $bannerText);

@@ -35,10 +35,10 @@ class CreateTableDefault extends Migration
             $table->string('last_name')->nullable(false);
             $table->string('email')->nullable(false);
             $table->string('phone')->nullable(false);
-            $table->string('zipcode')->nullable(false);
-            $table->string('address')->nullable(false);
-            $table->smallInteger('payment_way')->nullable(false);  //前払い：0 後払い：1
-            $table->integer('budget')->nullable();
+            $table->string('zipcode')->nullable(true);
+            $table->string('address')->nullable(true);
+            $table->smallInteger('payment_way')->nullable(false)->default(0);  //前払い：0 後払い：1
+            $table->integer('budget')->nullable(false)->default(0);
             $table->foreign('examination_id') 
                   ->references('id') 
                   ->on('user_examinations') 
@@ -147,12 +147,18 @@ class CreateTableDefault extends Migration
             $table->smallInteger('parent_id')->nullable(false);  //最上位階層の場合は0
             $table->integer('floor_price')->nullable();
             $table->float('average_bid_price')->nullable();
+            $table->smallInteger('is_delete')->default(0);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
 
         //表示広告テンプレート
         Schema::create('templates', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('advertiser_id')->unsigned();
+            $table->foreign('advertiser_id')
+                  ->references('id') 
+                  ->on('advertisers')
+                  ->onDelete('cascade');
             $table->string('url')->nullable(false);
             $table->longText('text')->nullable(false);
             $table->string('image_path')->nullable(false);
@@ -162,6 +168,11 @@ class CreateTableDefault extends Migration
         //広告情報
         Schema::create('advertisements', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('advertiser_id')->unsigned();
+            $table->foreign('advertiser_id')
+                  ->references('id') 
+                  ->on('advertisers')
+                  ->onDelete('cascade');
             $table->unsignedInteger('category_id');
             $table->foreign('category_id')
                   ->references('id') 
@@ -182,9 +193,14 @@ class CreateTableDefault extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')
-                  ->references('id') 
-                  ->on('users')
-                  ->onDelete('cascade');
+                ->references('id') 
+                ->on('users')
+                ->onDelete('cascade');
+            $table->unsignedInteger('admin_id');
+            $table->foreign('admin_id')
+                ->references('id') 
+                ->on('admins')
+                ->onDelete('cascade');
             $table->longText('text')->nullable(false);
             $table->smallInteger('from')->nullable(false);  //admin or user
             $table->dateTime('last_message_datetime')->nullable();
@@ -199,6 +215,11 @@ class CreateTableDefault extends Migration
             $table->foreign('advertiser_id')
                   ->references('id') 
                   ->on('advertisers')
+                  ->onDelete('cascade');
+            $table->unsignedInteger('admin_id');
+            $table->foreign('admin_id')
+                  ->references('id') 
+                  ->on('admins')
                   ->onDelete('cascade');
             $table->longText('text')->nullable(false);
             $table->smallInteger('from')->nullable(false);    //admin or advertiser

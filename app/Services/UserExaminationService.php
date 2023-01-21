@@ -74,21 +74,21 @@ class UserExaminationService
         }
     }
 
-    public function getDelivelerNoRegistered() {
+    public function getUserNoRegistered() {
         $userExaminationNoRegistered = $this->userExaminationRepository->getNoRegistered();
         $userExaminationNoRegisteredList = $this->createArrayResponse($userExaminationNoRegistered);
         return $userExaminationNoRegisteredList;
     }
 
-    public function approveDeliveler($userExaminationId) {
+    public function approveUser($userExaminationId) {
         if (empty($userExaminationId)){abort(response()->json(['message' => '仮登録IDは必須です。'], Response::HTTP_NOT_FOUND));}
 
         $userExamination = $this->userExaminationRepository->getById($userExaminationId);
-        $this->userExaminationValidation->validateJudgeDeliveler($userExamination);
+        $this->userExaminationValidation->validateJudgeUser($userExamination);
 
         try {
             DB::beginTransaction();
-            $this->userExaminationRepository->approve($userExaminationId);            
+            $this->userExaminationRepository->approve($userExaminationId);
             
             $userData = $this->userService->createUser(
                 $userExaminationId,
@@ -110,11 +110,11 @@ class UserExaminationService
         }
     }
 
-    public function disapproveDeliveler($userExaminationId) {
+    public function disapproveUser($userExaminationId) {
         if (empty($userExaminationId)){abort(response()->json(['message' => '仮登録IDは必須です。'], Response::HTTP_NOT_FOUND));}
 
         $userExamination = $this->userExaminationRepository->getById($userExaminationId);
-        $this->userExaminationValidation->validateJudgeDeliveler($userExamination);
+        $this->userExaminationValidation->validateJudgeUser($userExamination);
 
         try{
             DB::beginTransaction();
@@ -138,7 +138,7 @@ class UserExaminationService
 
     private function sendJudgeMail(UserExamination $userExamination, $judge, $password) {
         $email = $userExamination->getEmail();
-        Mail::send('mail.admin.judgeDeliveler', [
+        Mail::send('mail.admin.judgeUser', [
             'lastName' => $userExamination->getLastname(),
             'firstName' => $userExamination->getFirstName(),
             'judge' => $judge,

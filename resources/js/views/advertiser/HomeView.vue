@@ -7,11 +7,11 @@ import HomeMenuComponent from "../../components/common/HomeMenuComponent.vue";
 
 const menuObject = {
     'advertise':  '広告',
-    'user': 'アフィリエイター',
-    'advertiser': '広告主',
+    'report': 'レポート',
+    'deposit': '入金',
 };
 export default {
-    name: "AdminHome",
+    name: "UserHome",
     components: {
         HomeMenuComponent,
     },

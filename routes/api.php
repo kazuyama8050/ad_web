@@ -7,10 +7,11 @@ use App\Http\Controllers\Api\TaskController;
 /**
  * アフィリエイター
  */
-use App\Http\Controllers\Api\Deliveler\LoginDelivelerController;
+use App\Http\Controllers\Api\User\LoginUserController;
 use App\Http\Controllers\Api\Category\FirstLevelCategoriesController;
-use App\Http\Controllers\Api\Deliveler\RegisterApplyFormController;
-use App\Http\Controllers\Api\Deliveler\CategoriesController as DelivelerCategoriesController;
+use App\Http\Controllers\Api\User\RegisterApplyFormController;
+use App\Http\Controllers\Api\User\CategoriesController as UserCategoriesController;
+use App\Http\Controllers\Api\User\TemplateController as UserTemplateController;
 
 /**
  * 広告主
@@ -19,8 +20,8 @@ use App\Http\Controllers\Api\Deliveler\CategoriesController as DelivelerCategori
  /**
   * 管理者
   */
-use App\Http\Controllers\Api\Admin\DelivelerNoRegisteredController;
-use App\Http\Controllers\Api\Admin\AdminDelivelerController;
+use App\Http\Controllers\Api\Admin\UserNoRegisteredController;
+use App\Http\Controllers\Api\Admin\AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,11 +42,14 @@ Route::get('/test', [TaskController::class, 'getTest']);
 /**
  * アフィリエイター
  */
-Route::post('/login-deliveler', [LoginDelivelerController::class, 'login']);
-Route::get('/login-check-deliveler', [LoginDelivelerController::class, 'loginCheck']);
+Route::post('/login-user', [LoginUserController::class, 'login']);
+Route::get('/login-check-user', [LoginUserController::class, 'loginCheck']);
 Route::get('/first-level-categories', [FirstLevelCategoriesController::class, 'get']);
-Route::post('/register-deliveler-form', [RegisterApplyFormController::class, 'create']);
-Route::get('/all-categories', [DelivelerCategoriesController::class, 'getAll']);
+Route::post('/register-user-form', [RegisterApplyFormController::class, 'create']);
+Route::get('/all-categories', [UserCategoriesController::class, 'getAll']);
+
+//テンプレート
+Route::post('/user-template-create', [UserTemplateController::class, 'create']);
 
 /**
  * 広告主
@@ -54,7 +58,7 @@ Route::get('/all-categories', [DelivelerCategoriesController::class, 'getAll']);
  /**
   * 管理者
   */
-Route::get('/deliveler-no-registered', [DelivelerNoRegisteredController::class, 'get']);
-Route::post('approve-deliveler-form', [DelivelerNoRegisteredController::class, 'approve']);
-Route::post('disapprove-deliveler-form', [DelivelerNoRegisteredController::class, 'disapprove']);
-Route::get('all-deliveler', [AdminDelivelerController::class, 'getAll']);
+Route::get('/user-no-registered', [UserNoRegisteredController::class, 'get']);
+Route::post('approve-user-form', [UserNoRegisteredController::class, 'approve']);
+Route::post('disapprove-user-form', [UserNoRegisteredController::class, 'disapprove']);
+Route::get('all-user', [AdminUserController::class, 'getAll']);

@@ -53,6 +53,7 @@ class CategoryService {
         $categoryList['parentId'] = $category->getParentId();
         $categoryList['floorPrice'] = $category->getFloorPrice();
         $categoryList['averageBidPrice'] = $category->getAverageBidPrice();
+        $categoryList['isDelete'] = $category->getIsDelete();
 
         return $categoryList;
     }

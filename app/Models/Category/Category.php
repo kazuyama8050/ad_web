@@ -14,6 +14,7 @@ class Category extends Model
     private $parentId;
     private $floorPrice;
     private $averageBidPrice;
+    private $isDelete;
 
     // protected $fillable = [
     //     'id',
@@ -24,13 +25,14 @@ class Category extends Model
     //     'average_bid_price',
     // ];
 
-    public function __construct(int $id, string $name, int $level, int $parentId, int $floorPrice, $averageBidPrice) {
+    public function __construct(int $id, string $name, int $level, int $parentId, int $floorPrice, $averageBidPrice, $isDelete) {
         $this->id = $id;
         $this->name = $name;
         $this->level = $level;
         $this->parentId = $parentId;
         $this->floorPrice = $floorPrice;
         $this->averageBidPrice = $averageBidPrice;
+        $this->isDelete = $isDelete;
     }
 
     public function getId() {
@@ -71,5 +73,13 @@ class Category extends Model
 
     public function hasAverageBidPrice() {
         return !empty($this->averageBidPrice);
+    }
+
+    public function getIsDelete() {
+        return $this->isDelete;
+    }
+
+    public function isDeleted() {
+        return $this->isDelete == 1;
     }
 }
