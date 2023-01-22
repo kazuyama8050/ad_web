@@ -9,8 +9,6 @@ class User extends Model
     const NO_STOPPED = 0;
     const IS_RETIRE = 1;
     const NO_RETIRE = 0;
-    const ADVANCE_PAYMENT = 0;  //前払い
-    const REFERRED_PAYMENT = 1;  //後払い
 
     private $id;
     private $examinationId;
@@ -21,15 +19,13 @@ class User extends Model
     private $email;
     private $zipcode;
     private $address;
-    private $paymentWay;
-    private $budget;
     private $isStopped;
     private $isRetire;
 
     public function __construct(
         int $id, int $examinationId, string $password = null, string $lastName, string $firstName, 
         string $phone, string $email, string $zipcode = null, 
-        string $address = null, int $paymentWay, int $budget, int $isStopped, int $isRetire) {
+        string $address = null, int $isStopped, int $isRetire) {
 
         $this->id = $id;
         $this->examinationId = $examinationId;
@@ -40,8 +36,6 @@ class User extends Model
         $this->email = $email;
         $this->zipcode = $zipcode;
         $this->address = $address;
-        $this->paymentWay = $paymentWay;
-        $this->budget = $budget;
         $this->isStopped = $isStopped;
         $this->isRetire = $isRetire;
     }
@@ -86,13 +80,6 @@ class User extends Model
         return $this->paymentWay;
     }
 
-    public function isAdvancePayment() {
-        return $this->paymentWay == self::ADVANCE_PAYMENT;
-    }
-
-    public function isReferredPayment() {
-        return $this->paymentWay == self::REFERRED_PAYMENT;
-    }
 
     public function getBudget() {
         return $this->budget;

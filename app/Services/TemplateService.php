@@ -52,6 +52,7 @@ class TemplateService {
 
         } catch (\Throwable $e) {
             DB::rollBack();
+            abort(response()->json(['message' => '予期せぬエラーが発生しました。'], Response::HTTP_INTERNAL_SERVER_ERROR));
         }
         
     }

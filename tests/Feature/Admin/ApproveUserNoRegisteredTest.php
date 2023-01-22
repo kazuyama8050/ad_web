@@ -80,8 +80,6 @@ class ApproveUserNoRegisteredTest extends TestCase
             'phone' => '080-0808-0801',
             'zipcode' => null,
             'address' => null,
-            'paymentWay' => 0,
-            'budget' => 0,
             'isStopped' => 0,
             'isRetire' => 0,
         ];

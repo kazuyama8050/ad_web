@@ -37,8 +37,6 @@ class CreateTableDefault extends Migration
             $table->string('phone')->nullable(false);
             $table->string('zipcode')->nullable(true);
             $table->string('address')->nullable(true);
-            $table->smallInteger('payment_way')->nullable(false)->default(0);  //前払い：0 後払い：1
-            $table->integer('budget')->nullable(false)->default(0);
             $table->foreign('examination_id') 
                   ->references('id') 
                   ->on('user_examinations') 
@@ -81,6 +79,7 @@ class CreateTableDefault extends Migration
         Schema::create('advertisers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('password')->nullable(false);
+            $table->string('store_account')->nullable(false);
             $table->string('company_name')->nullable(false);
             $table->string('company_zipcode')->nullable(false);
             $table->string('company_address')->nullable(false);
@@ -89,6 +88,8 @@ class CreateTableDefault extends Migration
             $table->string('manager_last_name')->nullable(false);
             $table->string('manager_email')->nullable(false);
             $table->string('manager_phone')->nullable(false);
+            $table->smallInteger('payment_way')->nullable(false)->default(0);  //前払い：0 後払い：1
+            $table->integer('budget')->nullable(false)->default(0);
             $table->smallInteger('is_stopped')->nullable(false);  //アカウント運用中：0、アカウント停止中：1
             $table->smallInteger('is_retire')->nullable(false);  //未退会：0、退会済み：1
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

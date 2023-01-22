@@ -71,6 +71,7 @@ class UserExaminationService
 
         } catch (\Throwable $e) {
             DB::rollBack();
+            abort(response()->json(['message' => '予期せぬエラーが発生しました。'], Response::HTTP_INTERNAL_SERVER_ERROR));
         }
     }
 
@@ -107,6 +108,7 @@ class UserExaminationService
             return $userData["userId"];
         } catch (\Throwable $e) {
             DB::rollBack();
+            abort(response()->json(['message' => '予期せぬエラーが発生しました。'], Response::HTTP_INTERNAL_SERVER_ERROR));
         }
     }
 
@@ -133,6 +135,7 @@ class UserExaminationService
 
         } catch (\Throwable $e) {
             DB::rollBack();
+            abort(response()->json(['message' => '予期せぬエラーが発生しました。'], Response::HTTP_INTERNAL_SERVER_ERROR));
         }
     }
 
@@ -151,7 +154,7 @@ class UserExaminationService
 
     private function createResponse($userExamination) {
         $userExaminationResponse['id'] = $userExamination->getId();
-        $userExaminationResponse['lastName'] = $userExamination->GetLastName();
+        $userExaminationResponse['lastName'] = $userExamination->getLastName();
         $userExaminationResponse['firstName'] = $userExamination->getFirstName();
         $userExaminationResponse['phone'] = $userExamination->getPhone();
         $userExaminationResponse['email'] = $userExamination->getEmail();
@@ -165,7 +168,7 @@ class UserExaminationService
     private function createArrayResponse($userExaminations) {
         $userExaminationList = [];
         foreach ($userExaminations as $userExamination) {
-            $userExaminationList[$userExamination->getId()]['lastName'] = $userExamination->GetLastName();
+            $userExaminationList[$userExamination->getId()]['lastName'] = $userExamination->getLastName();
             $userExaminationList[$userExamination->getId()]['firstName'] = $userExamination->getFirstName();
             $userExaminationList[$userExamination->getId()]['phone'] = $userExamination->getPhone();
             $userExaminationList[$userExamination->getId()]['email'] = $userExamination->getEmail();

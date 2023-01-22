@@ -60,8 +60,6 @@ class UserRepository implements UserRepositoryInterface
             $row->email,
             $row->zipcode,
             $row->address,
-            (int) $row->payment_way,
-            (int) $row->budget,
             (int) $row->is_stopped,
             (int) $row->is_retire,
         );

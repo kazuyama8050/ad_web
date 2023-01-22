@@ -38,8 +38,6 @@ class GetAllUserTest extends TestCase
             'email' => 'validate1@email.com',
             'zipcode' => '000-0000',
             'address' => '東京都日野市',
-            'payment_way' => 0,
-            'budget' => 0,
             'is_stopped' => 0,
             'is_retire' => 0,
         ]);
@@ -53,8 +51,6 @@ class GetAllUserTest extends TestCase
             'email' => 'validate2@email.com',
             'zipcode' => '000-0002',
             'address' => '東京都日野市2',
-            'payment_way' => 1,
-            'budget' => 1100,
             'is_stopped' => 0,
             'is_retire' => 0,
         ]);
@@ -68,8 +64,6 @@ class GetAllUserTest extends TestCase
             'email' => 'validate3@email.com',
             'zipcode' => '000-0003',
             'address' => '東京都日野市3',
-            'payment_way' => 0,
-            'budget' => 0,
             'is_stopped' => 1,
             'is_retire' => 0,
         ]);
@@ -83,8 +77,6 @@ class GetAllUserTest extends TestCase
             'email' => 'validate4@email.com',
             'zipcode' => '000-0004',
             'address' => '東京都日野市4',
-            'payment_way' => 1,
-            'budget' => 12120,
             'is_stopped' => 0,
             'is_retire' => 1,
         ]);
@@ -110,8 +102,6 @@ class GetAllUserTest extends TestCase
             'email' => 'validate1@email.com',
             'zipcode' => '000-0000',
             'address' => '東京都日野市',
-            'paymentWay' => 0,
-            'budget' => 0,
             'isStopped' => 0,
             'isRetire' => 0,
         ]);
@@ -124,8 +114,6 @@ class GetAllUserTest extends TestCase
             'email' => 'validate2@email.com',
             'zipcode' => '000-0002',
             'address' => '東京都日野市2',
-            'paymentWay' => 1,
-            'budget' => 1100,
             'isStopped' => 0,
             'isRetire' => 0,
         ]);

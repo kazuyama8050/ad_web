@@ -22,8 +22,6 @@ Trait UserTrait
             'email' => "validate$num@email.com",
             'zipcode' => "000-000$num",
             'address' => "東京都日野市$num",
-            'payment_way' => 0,
-            'budget' => 0,
             'is_stopped' => $isStopped,
             'is_retire' => $isRetire,
         ]);

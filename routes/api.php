@@ -16,6 +16,8 @@ use App\Http\Controllers\Api\User\TemplateController as UserTemplateController;
 /**
  * 広告主
  */
+use App\Http\Controllers\Api\Advertiser\AdvertiserRegisterApplyFormController;
+use App\Http\Controllers\Api\Advertiser\LoginAdvertiserController;
 
  /**
   * 管理者
@@ -54,6 +56,8 @@ Route::post('/user-template-create', [UserTemplateController::class, 'create']);
 /**
  * 広告主
  */
+Route::post('/register-advertiser-form', [AdvertiserRegisterApplyFormController::class, 'create']);
+Route::post('/login-advertiser', [LoginAdvertiserController::class, 'login']);
 
  /**
   * 管理者

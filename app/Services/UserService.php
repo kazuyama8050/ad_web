@@ -89,7 +89,7 @@ class UserService
     private function createResponse(User $user) {
         $userList['id'] = $user->getId();
         $userList['examinationId'] = $user->getExaminationId();
-        $userList['lastName'] = $user->GetLastName();
+        $userList['lastName'] = $user->getLastName();
         $userList['firstName'] = $user->getFirstName();
         $userList['phone'] = $user->getPhone();
         $userList['email'] = $user->getEmail();
