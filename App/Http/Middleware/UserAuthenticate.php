@@ -17,12 +17,15 @@ class UserAuthenticate extends Middleware
      */
     public function handle($request, Closure $next)
     {
-        if (!$request->session()->exists('userId')) {
-            session()->flush();
-            http_response_code(Response::HTTP_UNAUTHORIZED);
-            return redirect($_ENV['USER_ROOT_PATH']."/login");
+        if ($request->session()->exists('userId') && $request->session()->exists('userEmail')) {
+            $request->merge(['userId' => $request->session()->get('userId')]);
+            $request->merge(['userEmail' => $request->session()->get('userEmail')]);
+
+            return $next($request);
         }
 
-        return $next($request);
+        session()->flush();
+        http_response_code(Response::HTTP_UNAUTHORIZED);
+        return redirect($_ENV['USER_ROOT_PATH']."/login");        
     }
 }
