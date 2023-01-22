@@ -16,12 +16,14 @@ class Template extends Model
 
 
     private $id;
+    private $advertiserId;
     private $url;
     private $text;
     private $image_path;
 
-    public function __construct(int $id, string $url, string $text, string $image_path) {
+    public function __construct(int $id, int $advertiserId, string $url, string $text, string $image_path) {
         $this->id = $id;
+        $this->advertiserId = $advertiserId;
         $this->url = $url;
         $this->text = $text;
         $this->imagePath = $image_path;
@@ -29,6 +31,10 @@ class Template extends Model
 
     public function getId() {
         return $this->id;
+    }
+
+    public function getAdvertiserId() {
+        return $this->advertiserId;
     }
 
     public function getUrl() {

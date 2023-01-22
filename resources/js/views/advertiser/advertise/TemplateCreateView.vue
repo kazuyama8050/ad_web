@@ -88,7 +88,7 @@ export default {
             formData.append('bannerImage', this.image);
             formData.append('bannerText', this.form.bannerText);
             formData.append('url', this.form.url);
-            axios.post('/api/user-template-create', formData, config)
+            axios.post('/api/advertise-template-create', formData, config)
             .then((res) => {
                 if (res.status == 200) {
                     this.responseMessage = '広告テンプレートを登録しました。';

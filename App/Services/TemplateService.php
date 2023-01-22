@@ -43,8 +43,7 @@ class TemplateService {
         try {
             $imagePath = $bannerImage->storeAs("public/uploads/advertisement/${advertiserId}", $uploadFileName);
             $imagePath = $this->changeViewFilePath($imagePath);
-
-            $templateId = $this->templateRepository->create($url, $imagePath, $bannerText);
+            $templateId = $this->templateRepository->create($advertiserId, $url, $imagePath, $bannerText);
             $template = $this->templateRepository->getById($templateId);
 
             $templateResponse = $this->createResponse($template);

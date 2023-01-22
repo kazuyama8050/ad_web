@@ -18,13 +18,14 @@ use App\Http\Controllers\Api\User\LoginUserController;
 use App\Http\Controllers\Api\Category\FirstLevelCategoriesController;
 use App\Http\Controllers\Api\User\RegisterApplyFormController;
 use App\Http\Controllers\Api\User\CategoriesController as UserCategoriesController;
-use App\Http\Controllers\Api\User\TemplateController as UserTemplateController;
+
 
 /**
  * 広告主
  */
 use App\Http\Controllers\Api\Advertiser\AdvertiserRegisterApplyFormController;
 use App\Http\Controllers\Api\Advertiser\LoginAdvertiserController;
+use App\Http\Controllers\Api\Advertiser\TemplateController as AdvertiserTemplateController;
 
  /**
   * 管理者
@@ -61,14 +62,20 @@ Route::get('/first-level-categories', [FirstLevelCategoriesController::class, 'g
 Route::post('/register-user-form', [RegisterApplyFormController::class, 'create']);
 Route::get('/all-categories', [UserCategoriesController::class, 'getAll']);
 
-//テンプレート
-Route::post('/user-template-create', [UserTemplateController::class, 'create']);
+Route::middleware([UserAuthenticate::class])->group(function () {
+
+});
+
 
 /**
  * 広告主
  */
 Route::post('/register-advertiser-form', [AdvertiserRegisterApplyFormController::class, 'create']);
 Route::post('/login-advertiser', [LoginAdvertiserController::class, 'login']);
+Route::middleware([AdvertiserAuthenticate::class])->group(function () {
+    //テンプレート
+    Route::post('/advertise-template-create', [AdvertiserTemplateController::class, 'create']);
+});
 
  /**
   * 管理者

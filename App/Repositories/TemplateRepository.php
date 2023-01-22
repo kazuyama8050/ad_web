@@ -11,8 +11,9 @@ class TemplateRepository implements TemplateRepositoryInterface
         return $this->rowMapper($template);
     }
 
-    public function create($url, $imagePath, $bannerText) {
+    public function create($advertiserId, $url, $imagePath, $bannerText) {
         $templateId = DB::table('templates')->insertGetId([
+            'advertiser_id' => $advertiserId,
             'url' => $url,
             'text' => $bannerText,
             'image_path' => $imagePath,
@@ -32,6 +33,7 @@ class TemplateRepository implements TemplateRepositoryInterface
         }
         return new Template(
             (int) $row->id,
+            (int) $row->advertiser_id,
             $row->url,
             $row->text,
             $row->image_path,

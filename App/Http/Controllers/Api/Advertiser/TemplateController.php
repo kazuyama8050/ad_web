@@ -18,7 +18,7 @@ class TemplateController extends Controller
     }
 
     public function create(Request $request) {
-        $advertiserId = $request->session()->get('advertiserId');
+        $advertiserId = $request->advertiserId;
         $requestBody = $request->input();
 
         $url = isset($requestBody["url"]) ? $requestBody["url"] : null;

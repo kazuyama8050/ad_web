@@ -13,5 +13,5 @@ interface TemplateRepositoryInterface
      * Summary of create
      * @return int
      */
-    public function create($url, $imagePath, $bannerText);
+    public function create($advertiserId, $url, $imagePath, $bannerText);
 }
