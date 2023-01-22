@@ -15,8 +15,6 @@
 </head>
 <body>
 <div id="app">
-    
-    <advertiser-header-component></advertiser-header-component>
     <router-view></router-view>
 </div>
 <!-- Scripts -->

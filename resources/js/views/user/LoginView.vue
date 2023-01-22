@@ -36,10 +36,6 @@ export default {
             })
             .then((res) => {
                 if (res.status == 200) {
-                    // this.Redirected();
-                    // this.responseMessage = 'ログインしました。'
-                    // this.$router.push('home')
-                    // location.assign('home');
                     location.reload();
                 } else {
                     this.responseMessage = '予期せぬエラーが発生しました。'
@@ -48,9 +44,6 @@ export default {
             .catch(error =>{
                 this.responseMessage = error.response.data.message;
             });
-        },
-        Redirected() {
-            this.$router.push('home');
         },
     },
 }

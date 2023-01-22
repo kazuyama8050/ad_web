@@ -6,7 +6,7 @@
         <AlertComponent :responseMessage="responseMessage"></AlertComponent>
 
         <form class="login-container" v-on:submit.prevent="submit">
-            <p><input type="email" placeholder="Email" v-model="form.email" required></p>
+            <p><input type="text" placeholder="ストアアカウント" v-model="form.storeAccount" required></p>
             <p><input type="password" placeholder="Password" v-model="form.password" required></p>
             <p><button class="" type="submit">Log In</button></p>
         </form>
@@ -17,7 +17,7 @@ import Vue from "vue";
 import AlertComponent from "../../components/common/AlertComponent.vue";
 
 export default {
-    name: "UserLogin",
+    name: "AdvertiserLogin",
     components: {
         AlertComponent,
     },
@@ -30,16 +30,12 @@ export default {
     },
     methods: {
         submit: function() {
-            axios.post('/api/login-user', {
-                email: this.form.email,
+            axios.post('/api/login-advertiser', {
+                email: this.form.storeAccount,
                 password: this.form.password,
             })
             .then((res) => {
                 if (res.status == 200) {
-                    // this.Redirected();
-                    // this.responseMessage = 'ログインしました。'
-                    // this.$router.push('home')
-                    // location.assign('home');
                     location.reload();
                 } else {
                     this.responseMessage = '予期せぬエラーが発生しました。'
@@ -48,9 +44,6 @@ export default {
             .catch(error =>{
                 this.responseMessage = error.response.data.message;
             });
-        },
-        Redirected() {
-            this.$router.push('home');
         },
     },
 }

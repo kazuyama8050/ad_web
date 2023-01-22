@@ -10,11 +10,14 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js"
 import UserLogin from "./views/user/LoginView";
 import UserHome from "./views/user/HomeView";
 import UserRegister from "./views/user/RegisterView";
-import HeaderComponent from "./components/user/HeaderComponent";
+import UserHeaderComponent from "./components/user/HeaderComponent";
 
 /**
  * advertiser
  */
+import AdvertiserHeaderComponent from "./components/advertiser/HeaderComponent";
+import AdvertiserRegister from "./views/advertiser/RegisterView";
+import AdvertiserLogin from "./views/advertiser/LoginView";
 import AdvertiserTemplateCreate from "./views/advertiser/advertise/TemplateCreateView";
 
 
@@ -54,7 +57,8 @@ const ADMIN_ROOT_PATH="/admin"
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-Vue.component('header-component', HeaderComponent);
+Vue.component('user-header-component', UserHeaderComponent);
+Vue.component('advertiser-header-component', AdvertiserHeaderComponent);
 Vue.component('admin-header-component', AdminHeaderComponent);
 
 /**
@@ -96,6 +100,16 @@ window.Vue = require('vue').default;const router = new Router({
             }
         },
         //広告主
+        {
+            path: ADVERTISER_ROOT_PATH + '/register',
+            name: 'advertiser.register.',
+            component: AdvertiserRegister
+        },
+        {
+            path: ADVERTISER_ROOT_PATH + '/login',
+            name: 'advertiser.login',
+            component: AdvertiserLogin
+        },
         {
             path: ADVERTISER_ROOT_PATH + '/template/create',
             name: 'advertiser.template.create',
