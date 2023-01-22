@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\Advertiser\LoginAdvertiserController;
  /**
   * 管理者
   */
+use App\Http\Controllers\Api\Admin\LoginAdminController;
 use App\Http\Controllers\Api\Admin\UserNoRegisteredController;
 use App\Http\Controllers\Api\Admin\AdminUserController;
 
@@ -62,6 +63,7 @@ Route::post('/login-advertiser', [LoginAdvertiserController::class, 'login']);
  /**
   * 管理者
   */
+Route::post('/login-admin', [LoginAdminController::class, 'login']);
 Route::get('/user-no-registered', [UserNoRegisteredController::class, 'get']);
 Route::post('approve-user-form', [UserNoRegisteredController::class, 'approve']);
 Route::post('disapprove-user-form', [UserNoRegisteredController::class, 'disapprove']);

@@ -6,6 +6,8 @@ use App\Http\Middleware\UserAuthenticate;
 use App\Http\Middleware\UserAuthenticateRedirector;
 use App\Http\Middleware\AdvertiserAuthenticate;
 use App\Http\Middleware\AdvertiserAuthenticateRedirector;
+use App\Http\Middleware\AdminAuthenticate;
+use App\Http\Middleware\AdminAuthenticateRedirector;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,7 +53,11 @@ Route::get($_ENV['ADVERTISER_ROOT_PATH'].'/{any}', function() {
 /**
  * 管理者
  */
+Route::get($_ENV['ADMIN_ROOT_PATH']."/login", function() {
+    return view($_ENV['ADMIN_ROOT_PATH'].'/app_no_header');
+})->middleware(AdminAuthenticateRedirector::class);
+
 Route::get($_ENV['ADMIN_ROOT_PATH'].'/{any}', function() {
     return view($_ENV['ADMIN_ROOT_PATH'].'/app');
-})->where('any', '.*');
+})->where('any', '.*')->middleware(AdminAuthenticate::class);
 
