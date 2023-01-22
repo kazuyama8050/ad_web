@@ -3,7 +3,7 @@
         <PageTitleComponent title="アフィリエイター"></PageTitleComponent>
         <AlertComponent :responseMessage="responseMessage"></AlertComponent>
         <TabComponent :tabObject="tabObject" :activePage="activePage"></TabComponent>
-        <TableListComponent :head-list="userHeadList" :body-list="users"></TableListComponent>
+        <TableListComponent :headList="userHeadList" :bodyList="users"></TableListComponent>
     </div>
 </template>
 <script>
@@ -47,7 +47,7 @@ export default {
             data: [],
             responseMessage: null,
             userHeadList,
-            users: []
+            users: [],
         }
     },
     methods: {
@@ -62,7 +62,7 @@ export default {
         },
     },
     mounted() {
-        this.getNoRegisteredUser();
+        this.getAllUser();
     },
 }
 </script>

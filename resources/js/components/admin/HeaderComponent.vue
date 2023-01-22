@@ -22,7 +22,7 @@
                 <div class="d-flex">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin/logout">ログアウト</a>
+                            <LogoutComponent target="admin"></LogoutComponent>
                         </li>
                     </ul>
                 </div>
@@ -37,5 +37,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 <script>
-    export default {}
+    import LogoutComponent from "../common/LogoutComponent.vue";
+    export default {
+        components: {
+            LogoutComponent,
+        }
+    }
 </script>

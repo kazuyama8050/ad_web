@@ -26,6 +26,9 @@ use App\Http\Controllers\Api\Admin\LoginAdminController;
 use App\Http\Controllers\Api\Admin\UserNoRegisteredController;
 use App\Http\Controllers\Api\Admin\AdminUserController;
 
+
+use App\Http\Controllers\Api\LogoutController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -68,3 +71,8 @@ Route::get('/user-no-registered', [UserNoRegisteredController::class, 'get']);
 Route::post('approve-user-form', [UserNoRegisteredController::class, 'approve']);
 Route::post('disapprove-user-form', [UserNoRegisteredController::class, 'disapprove']);
 Route::get('all-user', [AdminUserController::class, 'getAll']);
+
+
+
+
+Route::get('logout/{target}', [LogoutController::class, 'logout']);

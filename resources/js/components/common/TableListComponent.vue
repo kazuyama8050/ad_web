@@ -7,8 +7,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(value, keys) in Object.keys(headList)">
-                    <td v-for="(key) in keys">{{ value[key] }}</td>
+                <tr v-for="(body) in bodyList">
+                    <td v-for="(value, key) in headList">{{ body[key] }}</td>
                 </tr>
             </tbody>
         </table>
@@ -23,7 +23,7 @@
                 required: true,
             },
             bodyList: {
-                type: Object,
+                type: Array,
                 required: true,
             },
         },
