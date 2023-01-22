@@ -19,6 +19,16 @@
                         </li>
                     </ul>
                 </div>
+                <div class="d-flex">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/advertiser/account">アカウント</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/advertiser/logout">ログアウト</a>
+                        </li>
+                    </ul>
+                </div>
             </nav>
         </div>
     </div>
