@@ -31,7 +31,7 @@ export default {
     methods: {
         submit: function() {
             axios.post('/api/login-advertiser', {
-                email: this.form.storeAccount,
+                storeAccount: this.form.storeAccount,
                 password: this.form.password,
             })
             .then((res) => {

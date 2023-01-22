@@ -6,10 +6,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use DatabaseMigrations;
 use Illuminate\Support\Facades\DB;
+use Tests\Helper\AdminLoginTrait;
 
 class GetUserNoRegisteredTest extends TestCase
 {
     use RefreshDatabase;
+    use AdminLoginTrait;
     public function setup(): void {
         parent::setup();
         $this->insertNecessaryTestData();
@@ -60,6 +62,7 @@ class GetUserNoRegisteredTest extends TestCase
      */
     public function test_正常()
     {
+        AdminLoginTrait::adminLogin();
         $response = $this->get('/api/user-no-registered');
         $response->assertStatus(200);
 
@@ -81,6 +84,8 @@ class GetUserNoRegisteredTest extends TestCase
             'siteDomein' => 'aaaaa2.com',
             'category' => '金融',
         ]);
+
+        session()->flush();
 
     }
 }

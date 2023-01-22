@@ -6,10 +6,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use DatabaseMigrations;
 use Illuminate\Support\Facades\DB;
+use Tests\Helper\AdminLoginTrait;
 
 class ApproveUserNoRegisteredTest extends TestCase
 {
     use RefreshDatabase;
+    use AdminLoginTrait;
     public function setup(): void {
         parent::setup();
         $this->insertNecessaryTestData();
@@ -50,6 +52,7 @@ class ApproveUserNoRegisteredTest extends TestCase
     }
 
     public function runApi($userExaminationId, $expectedResponse, $reviewFlag = null, $statusCode = 200) {
+        AdminLoginTrait::adminLogin();
         $response = $this->post("/api/approve-user-form", ['userExaminationId' => $userExaminationId]);
 
         $response->assertStatus($statusCode);
@@ -59,7 +62,8 @@ class ApproveUserNoRegisteredTest extends TestCase
             $this->assertEquals($reviewFlag, $userExamination->review_flag);
         }
 
-        $response->assertJsonFragment($expectedResponse);        
+        $response->assertJsonFragment($expectedResponse);
+        session()->flush();   
     }
 
     /**

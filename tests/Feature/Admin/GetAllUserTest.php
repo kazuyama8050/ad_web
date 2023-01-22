@@ -6,10 +6,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use DatabaseMigrations;
 use Illuminate\Support\Facades\DB;
+use Tests\Helper\AdminLoginTrait;
 
 class GetAllUserTest extends TestCase
 {
     use RefreshDatabase;
+    use AdminLoginTrait;
     public function setup(): void {
         parent::setup();
         $this->insertNecessaryTestData();
@@ -88,6 +90,7 @@ class GetAllUserTest extends TestCase
      */
     public function test_正常()
     {
+        AdminLoginTrait::adminLogin();
         $response = $this->get('/api/all-user');
         $response->assertStatus(200);
 
@@ -117,6 +120,8 @@ class GetAllUserTest extends TestCase
             'isStopped' => 0,
             'isRetire' => 0,
         ]);
+
+        session()->flush();
 
     }
 }

@@ -15,7 +15,7 @@ class AdminUserController extends Controller
     public function __construct(UserService $userSerice) {
         $this->userSerice = $userSerice;
     }
-    public function getAll() {
+    public function getAll(Request $request) {
         $user = $this->userSerice->getAllUser();
         return json_encode($user);
     }
