@@ -5,6 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TaskController;
 
 /**
+ * middleware
+ */
+use App\Http\Middleware\AdminAuthenticate;
+use App\Http\Middleware\UserAuthenticate;
+use App\Http\Middleware\AdvertiserAuthenticate;
+
+/**
  * アフィリエイター
  */
 use App\Http\Controllers\Api\User\LoginUserController;
@@ -67,10 +74,14 @@ Route::post('/login-advertiser', [LoginAdvertiserController::class, 'login']);
   * 管理者
   */
 Route::post('/login-admin', [LoginAdminController::class, 'login']);
-Route::get('/user-no-registered', [UserNoRegisteredController::class, 'get']);
-Route::post('approve-user-form', [UserNoRegisteredController::class, 'approve']);
-Route::post('disapprove-user-form', [UserNoRegisteredController::class, 'disapprove']);
-Route::get('all-user', [AdminUserController::class, 'getAll']);
+Route::middleware([AdminAuthenticate::class])->group(function () {
+    Route::get('/user-no-registered', [UserNoRegisteredController::class, 'get']);
+    Route::post('approve-user-form', [UserNoRegisteredController::class, 'approve']);
+    Route::post('disapprove-user-form', [UserNoRegisteredController::class, 'disapprove']);
+    Route::get('all-user', [AdminUserController::class, 'getAll']);
+});
+
+
 
 
 

@@ -24,7 +24,6 @@ class UserAuthenticate extends Middleware
             return $next($request);
         }
 
-        session()->flush();
         http_response_code(Response::HTTP_UNAUTHORIZED);
         return redirect($_ENV['USER_ROOT_PATH']."/login");        
     }

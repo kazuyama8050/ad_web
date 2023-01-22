@@ -21,6 +21,7 @@ class LogoutController extends Controller
         if ($target === 'admin') {
             $request->session()->forget('adminId');
             $request->session()->forget('adminEmail');
+            $request->session()->forget('adminAuthenticate');
         }
 
         return json_encode([

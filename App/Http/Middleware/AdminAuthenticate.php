@@ -25,7 +25,6 @@ class AdminAuthenticate extends Middleware
             return $next($request);
         }
 
-        session()->flush();
         http_response_code(Response::HTTP_UNAUTHORIZED);
         return redirect($_ENV['ADMIN_ROOT_PATH']."/login");
     }
