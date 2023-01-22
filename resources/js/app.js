@@ -18,6 +18,7 @@ import UserHeaderComponent from "./components/user/HeaderComponent";
 import AdvertiserHeaderComponent from "./components/advertiser/HeaderComponent";
 import AdvertiserRegister from "./views/advertiser/RegisterView";
 import AdvertiserLogin from "./views/advertiser/LoginView";
+import AdvertiserHome from "./views/advertiser/HomeView";
 import AdvertiserTemplateCreate from "./views/advertiser/advertise/TemplateCreateView";
 
 
@@ -109,6 +110,11 @@ window.Vue = require('vue').default;const router = new Router({
             path: ADVERTISER_ROOT_PATH + '/login',
             name: 'advertiser.login',
             component: AdvertiserLogin
+        },
+        {
+            path: ADVERTISER_ROOT_PATH + '/home',
+            name: 'advertiser.home',
+            component: AdvertiserHome
         },
         {
             path: ADVERTISER_ROOT_PATH + '/template/create',

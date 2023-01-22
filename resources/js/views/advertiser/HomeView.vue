@@ -8,10 +8,10 @@ import HomeMenuComponent from "../../components/common/HomeMenuComponent.vue";
 const menuObject = {
     'advertise':  '広告',
     'report': 'レポート',
-    'deposit': '入金',
+    'user': 'アフィリエイター',
 };
 export default {
-    name: "UserHome",
+    name: "AdvertiserHome",
     components: {
         HomeMenuComponent,
     },
