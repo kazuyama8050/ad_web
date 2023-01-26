@@ -36,7 +36,7 @@ import PageTitleComponent from "../../../components/common/PageTitleComponent.vu
 import AlertComponent from "../../../components/common/AlertComponent.vue";
 
 export default {
-    name: "UserTemplateCreate",
+    name: "AdvertiserTemplateCreate",
     components: {
         FormTextComponent,
         FormSelectBoxComponent,
@@ -88,7 +88,7 @@ export default {
             formData.append('bannerImage', this.image);
             formData.append('bannerText', this.form.bannerText);
             formData.append('url', this.form.url);
-            axios.post('/api/advertise-template-create', formData, config)
+            axios.post('/api/advertise-template', formData, config)
             .then((res) => {
                 if (res.status == 200) {
                     this.responseMessage = '広告テンプレートを登録しました。';

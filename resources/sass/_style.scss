@@ -135,3 +135,30 @@
 .table-wrap {
   overflow-x: scroll;
 }
+
+// アフィリエイトリンクデザイン
+.adlink-container {
+  width: 400px;
+  height: 120px;
+  display: flex;
+  background: #c6e4ff;
+  border-bottom: solid 6px #aac5de;
+  border-radius: 9px;
+}
+.adlink-element {
+  height: 120px;
+}
+.adlink-element img {
+  height: 100px;
+  width: 100px;
+  margin-top: 8px;
+  margin-left: 5px;
+}
+.adlink-element p {
+  height: 120px;
+	width: 300px;
+	padding-right: 5px;
+	padding-left: 5px;
+	display: grid;
+	place-items: center center;
+}

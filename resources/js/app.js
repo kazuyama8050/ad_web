@@ -20,6 +20,7 @@ import AdvertiserRegister from "./views/advertiser/RegisterView";
 import AdvertiserLogin from "./views/advertiser/LoginView";
 import AdvertiserHome from "./views/advertiser/HomeView";
 import AdvertiserTemplateCreate from "./views/advertiser/advertise/TemplateCreateView";
+import AdvertiserTemplateList from "./views/advertiser/advertise/TemplateListView";
 
 
 
@@ -120,6 +121,11 @@ window.Vue = require('vue').default;const router = new Router({
             path: ADVERTISER_ROOT_PATH + '/template/create',
             name: 'advertiser.template.create',
             component: AdvertiserTemplateCreate
+        },
+        {
+            path: ADVERTISER_ROOT_PATH + '/template/list',
+            name: 'advertiser.template.list',
+            component: AdvertiserTemplateList
         },
         //管理画面
         {
