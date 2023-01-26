@@ -209,7 +209,7 @@ class CreateTemplateTest extends TestCase
         ];
 
         $expectedResponse = [
-            'message' => 'バナー画像のサイズは30×30で指定してください。',
+            'message' => 'バナー画像のサイズは100×100で指定してください。',
         ];
 
         $this->runApi($requestBody, $expectedResponse, 400);
@@ -230,7 +230,7 @@ class CreateTemplateTest extends TestCase
         ];
 
         $expectedResponse = [
-            'message' => 'バナー画像のサイズは30×30で指定してください。',
+            'message' => 'バナー画像のサイズは100×100で指定してください。',
         ];
 
         $this->runApi($requestBody, $expectedResponse, 400);

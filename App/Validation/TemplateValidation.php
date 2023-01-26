@@ -9,9 +9,14 @@ class TemplateValidation
         'jpg',
     ];
 
+    public function isExistTemplate($template) {
+        if (empty($template)){abort(response()->json(['message' => '対象のテンプレートは存在しません。'], Response::HTTP_BAD_REQUEST));}
+        return true;
+    }
+
     public function validateBannerText($text) {
         if (mb_strlen($text) > Template::MAX_TEXT_SIZE || mb_strlen($text) < Template::MIN_TEXT_SIZE) {
-            abort(response()->json(['message' => 'バナーテキストは10文字以上50文字以内で入力してください。'], Response::HTTP_BAD_REQUEST));
+            abort(response()->json(['message' => 'バナーテキストは'.Template::MIN_TEXT_SIZE.'文字以上'.Template::MAX_TEXT_SIZE.'文字以内で入力してください。'], Response::HTTP_BAD_REQUEST));
             return false;
         }
         return true;
@@ -30,7 +35,7 @@ class TemplateValidation
         $imageHeight = getimagesize($image)[1];
 
         if ($imageWidth != Template::IMAGE_WIDTH || $imageHeight != Template::IMAGE_HEIGHT) {
-            abort(response()->json(['message' => 'バナー画像のサイズは30×30で指定してください。'], Response::HTTP_BAD_REQUEST));
+            abort(response()->json(['message' => 'バナー画像のサイズは'.Template::IMAGE_WIDTH.'×'.Template::IMAGE_HEIGHT.'で指定してください。'], Response::HTTP_BAD_REQUEST));
         }
         return true;
     }

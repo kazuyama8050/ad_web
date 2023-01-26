@@ -74,7 +74,9 @@ Route::post('/register-advertiser-form', [AdvertiserRegisterApplyFormController:
 Route::post('/login-advertiser', [LoginAdvertiserController::class, 'login']);
 Route::middleware([AdvertiserAuthenticate::class])->group(function () {
     //テンプレート
-    Route::post('/advertise-template-create', [AdvertiserTemplateController::class, 'create']);
+    Route::post('/advertise-template', [AdvertiserTemplateController::class, 'create']);
+    Route::get('/advertise-template-list', [AdvertiserTemplateController::class, 'getByAdvertiserId']);
+    Route::delete('/advertise-template/{templateId}', [AdvertiserTemplateController::class, 'deleteByTemplateId']);
 });
 
  /**

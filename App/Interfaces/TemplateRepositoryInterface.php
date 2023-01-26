@@ -9,9 +9,22 @@ interface TemplateRepositoryInterface
      * @return Template
      */
     public function getById($id);
+
+    /**
+     * Summary of getByAdvertiserId
+     * @return array(Template)
+     */
+    public function getByAdvertiserId($advertiserId);
+
     /**
      * Summary of create
      * @return int
      */
     public function create($advertiserId, $url, $imagePath, $bannerText);
+
+    /**
+     * Summary of deleteByTemplateId
+     * @return 
+     */
+    public function deleteByTemplateId($templateId);
 }

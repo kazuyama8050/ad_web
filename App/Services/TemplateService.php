@@ -56,6 +56,36 @@ class TemplateService {
         
     }
 
+    public function getByAdvertiserId($advertiserId) {
+        $templates = $this->templateRepository->getByAdvertiserId($advertiserId);
+
+        if (empty($templates)) {
+            return [];
+        }
+
+        $templateList = [];
+        foreach ($templates as $template) {
+            $templateList[$template->getId()] = $this->createResponse($template);
+        }
+
+        return $templateList;
+    }
+
+    public function deleteByTemplateId($advertiserId, $templateId) {
+        if (empty($templateId)){abort(response()->json(['message' => 'テンプレートIDは必須項目です。'], Response::HTTP_BAD_REQUEST));}
+
+        $template = $this->templateRepository->getById($templateId);
+        $this->templateValidation->isExistTemplate($template);
+        try {
+            $this->templateRepository->deleteByTemplateId($templateId);
+            return $this->createResponse($template);
+
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            abort(response()->json(['message' => '予期せぬエラーが発生しました。'], Response::HTTP_INTERNAL_SERVER_ERROR));
+        }
+    } 
+
     private function changeViewFilePath($imagePath) {
         return str_replace("public", "storage", $imagePath);
     }
@@ -63,6 +93,7 @@ class TemplateService {
     private function createResponse(Template $template) {
         $templateList = [];
         $templateList['id'] = $template->getId();
+        $templateList['advertiserId'] = $template->getAdvertiserId();
         $templateList['url'] = $template->getUrl();
         $templateList['bannerText'] = $template->getText();
         $templateList['imagePath'] = $template->getImagePath();

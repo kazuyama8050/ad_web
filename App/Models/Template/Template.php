@@ -11,22 +11,22 @@ class Template extends Model
     const URL_PATTERN = '/https?:\/{2}[\w\/:%#\$&\?\(\)~\.=\+\-]+/';
     const MAX_TEXT_SIZE = 50;
     const MIN_TEXT_SIZE = 10;
-    const IMAGE_WIDTH = 30;
-    const IMAGE_HEIGHT = 30;
+    const IMAGE_WIDTH = 100;
+    const IMAGE_HEIGHT = 100;
 
 
     private $id;
     private $advertiserId;
     private $url;
     private $text;
-    private $image_path;
+    private $imagePath;
 
-    public function __construct(int $id, int $advertiserId, string $url, string $text, string $image_path) {
+    public function __construct(int $id, int $advertiserId, string $url, string $text, string $imagePath) {
         $this->id = $id;
         $this->advertiserId = $advertiserId;
         $this->url = $url;
         $this->text = $text;
-        $this->imagePath = $image_path;
+        $this->imagePath = $imagePath;
     }
 
     public function getId() {

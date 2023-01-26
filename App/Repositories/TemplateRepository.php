@@ -10,6 +10,17 @@ class TemplateRepository implements TemplateRepositoryInterface
         $template = DB::table('templates')->where('id', $id)->first();
         return $this->rowMapper($template);
     }
+    public function getByAdvertiserId($advertiserId) {
+        $templates = DB::table('templates')->where('advertiser_id', $advertiserId)->get();
+        if (empty($templates)) {
+            return [];
+        }
+        $templateList = [];
+        foreach ($templates as $template) {
+            $templateList[] = $this->rowMapper($template);
+        }
+        return $templateList;
+    }
 
     public function create($advertiserId, $url, $imagePath, $bannerText) {
         $templateId = DB::table('templates')->insertGetId([
@@ -20,6 +31,10 @@ class TemplateRepository implements TemplateRepositoryInterface
         ]);
 
         return $templateId;
+    }
+
+    public function deleteByTemplateId($templateId) {
+        DB::table('templates')->where('id', $templateId)->delete();
     }
 
     /**
