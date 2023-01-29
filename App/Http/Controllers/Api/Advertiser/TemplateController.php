@@ -39,6 +39,15 @@ class TemplateController extends Controller
         return json_encode($templateList);
     }
 
+    public function getById(Request $request) {
+        $advertiserId = $request->advertiserId;
+        $templateId = $request->templateId ? $request->templateId : null;
+
+        $template = $this->templateService->getById($advertiserId, $templateId);
+
+        return json_encode($template);
+    }
+
     public function deleteByTemplateId(Request $request) {
         $advertiserId = $request->advertiserId;
 

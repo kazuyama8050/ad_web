@@ -8,7 +8,7 @@ interface TemplateRepositoryInterface
      * Summary of getById
      * @return Template
      */
-    public function getById($id);
+    public function getById($advertiserId, $id);
 
     /**
      * Summary of getByAdvertiserId

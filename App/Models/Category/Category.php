@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+    const MAX_PRICE = 1000;
 
     private $id;
     private $name;

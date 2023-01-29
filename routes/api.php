@@ -26,6 +26,8 @@ use App\Http\Controllers\Api\User\CategoriesController as UserCategoriesControll
 use App\Http\Controllers\Api\Advertiser\AdvertiserRegisterApplyFormController;
 use App\Http\Controllers\Api\Advertiser\LoginAdvertiserController;
 use App\Http\Controllers\Api\Advertiser\TemplateController as AdvertiserTemplateController;
+use App\Http\Controllers\Api\Advertiser\CategoryController as AdvertiserCategoryController;
+use App\Http\Controllers\Api\Advertiser\AdvertisementController as AdvertiserAdvertisementController;
 
  /**
   * 管理者
@@ -74,9 +76,16 @@ Route::post('/register-advertiser-form', [AdvertiserRegisterApplyFormController:
 Route::post('/login-advertiser', [LoginAdvertiserController::class, 'login']);
 Route::middleware([AdvertiserAuthenticate::class])->group(function () {
     //テンプレート
-    Route::post('/advertise-template', [AdvertiserTemplateController::class, 'create']);
-    Route::get('/advertise-template-list', [AdvertiserTemplateController::class, 'getByAdvertiserId']);
-    Route::delete('/advertise-template/{templateId}', [AdvertiserTemplateController::class, 'deleteByTemplateId']);
+    Route::post('/advertiser-template', [AdvertiserTemplateController::class, 'create']);
+    Route::get('/advertiser-template-list', [AdvertiserTemplateController::class, 'getByAdvertiserId']);
+    Route::get('/advertiser-template/{templateId}', [AdvertiserTemplateController::class, 'getById']);
+    Route::delete('/advertiser-template/{templateId}', [AdvertiserTemplateController::class, 'deleteByTemplateId']);
+
+    //カテゴリ
+    Route::get('/advertise-category-all', [AdvertiserCategoryController::class, 'getAll']);
+
+    //広告
+    Route::post('/advertiser-advertise', [AdvertiserAdvertisementController::class, 'create']);
 });
 
  /**

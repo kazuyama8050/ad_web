@@ -46,7 +46,7 @@ class GetTemplateListTest extends TestCase
         $templates = DB::table('templates')->get();
 
         AdvertiserLoginTrait::advertiserLogin($advertiserId = 1, $advertiserStoreAccount = 'store1');
-        $response = $this->get("/api/advertise-template-list");
+        $response = $this->get("/api/advertiser-template-list");
 
         $response->assertStatus(200);
         $response->assertJsonFragment($expectedResponse);
@@ -59,7 +59,7 @@ class GetTemplateListTest extends TestCase
         $expectedResponse = [];
 
         AdvertiserLoginTrait::advertiserLogin($advertiserId = 2, $advertiserStoreAccount = 'store2');
-        $response = $this->get("/api/advertise-template-list");
+        $response = $this->get("/api/advertiser-template-list");
 
         $response->assertStatus(200);
         $response->assertJsonFragment($expectedResponse);

@@ -30,7 +30,7 @@ class CreateTemplateTest extends TestCase
 
     public function runApi($requestBody, $expectedResponse, $statusCode = 200) {
         AdvertiserLoginTrait::advertiserLogin($advertiserId = 1, $advertiserStoreAccount = 'store1');
-        $response = $this->post("/api/advertise-template-create", $requestBody);
+        $response = $this->post("/api/advertiser-template", $requestBody);
 
         $response->assertStatus($statusCode);
         $decodedResponse = $response->decodeResponseJson();

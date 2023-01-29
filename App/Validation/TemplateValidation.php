@@ -10,7 +10,7 @@ class TemplateValidation
     ];
 
     public function isExistTemplate($template) {
-        if (empty($template)){abort(response()->json(['message' => '対象のテンプレートは存在しません。'], Response::HTTP_BAD_REQUEST));}
+        if (empty($template)){abort(response()->json(['message' => '対象のテンプレートは存在しません。'], Response::HTTP_NOT_FOUND));}
         return true;
     }
 

@@ -2,8 +2,10 @@
 namespace App\Services;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\CategoryRepository;
+use App\Validation\CategoryValidation;
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Models\Category\Category;
+use \Symfony\Component\HttpFoundation\Response;
 
 class CategoryService {
     /**
@@ -12,8 +14,15 @@ class CategoryService {
      */
     private $categoryRepository;
 
-    public function __construct(CategoryRepository $categoryRepository) {
+    /**
+     * Summary of categoryValidation
+     * @var CategoryValidation $categoryValidation
+     */
+    private $categoryValidation;
+
+    public function __construct(CategoryRepository $categoryRepository, CategoryValidation $categoryValidation) {
         $this->categoryRepository = $categoryRepository;
+        $this->categoryValidation = $categoryValidation;
     }
 
     /**
@@ -43,6 +52,15 @@ class CategoryService {
             
         }
         return $allCategoryList;
+    }
+
+    public function getById($categoryId) {
+        if (empty($categoryId)){abort(response()->json(['message' => 'カテゴリは必須項目です。'], Response::HTTP_BAD_REQUEST));}
+
+        $category = $this->categoryRepository->getById($categoryId);
+        $this->categoryValidation->isExistCategory($categoryId);
+
+        return $category;
     }
 
     private function createResponse(Category $category) {

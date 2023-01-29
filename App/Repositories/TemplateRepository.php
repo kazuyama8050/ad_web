@@ -6,8 +6,8 @@ use App\Models\Template\Template;
 
 class TemplateRepository implements TemplateRepositoryInterface
 {
-    public function getById($id) {
-        $template = DB::table('templates')->where('id', $id)->first();
+    public function getById($advertiserId, $id) {
+        $template = DB::table('templates')->where([['id', $id], ['advertiser_id', $advertiserId]])->first();
         return $this->rowMapper($template);
     }
     public function getByAdvertiserId($advertiserId) {

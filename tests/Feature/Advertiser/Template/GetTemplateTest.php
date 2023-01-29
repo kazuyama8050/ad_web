@@ -14,7 +14,7 @@ use App\Models\Template\Template;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 
-class DeleteTemplateTest extends TestCase
+class GetTemplateTest extends TestCase
 {
     use RefreshDatabase;
     use AdvertiserLoginTrait;
@@ -36,12 +36,12 @@ class DeleteTemplateTest extends TestCase
 
     public function runApi($templateId, $expectedResponse, $statusCode = 200) {
         AdvertiserLoginTrait::advertiserLogin($advertiserId = 1, $advertiserStoreAccount = 'store1');
-        $response = $this->delete("/api/advertiser-template/$templateId",);
+        $response = $this->get("/api/advertiser-template/$templateId",);
 
         $response->assertStatus($statusCode);
         $response->assertJsonFragment($expectedResponse);
 
-        if ($statusCode != 200) {
+    if ($statusCode != 200) {
             $templateCount = DB::table('templates')->where('id', $templateId)->count();
             $this->assertEquals(0, $templateCount);
         }

@@ -15,6 +15,11 @@ class CategoryRepository implements CategoryRepositoryInterface {
         'is_delete',
     ];
 
+    public function getById($categoryId) {
+        $category = DB::table('categories')->where('id', $categoryId)->first();
+        return $this->rowMapper($category);
+    }
+
     public function getFirstLevelCatgories() {
         $columns = join(',', $this->categoryColumns);
         $firstLevelCategories = DB::table('categories')

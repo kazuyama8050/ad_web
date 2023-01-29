@@ -44,7 +44,7 @@ class TemplateService {
             $imagePath = $bannerImage->storeAs("public/uploads/advertisement/${advertiserId}", $uploadFileName);
             $imagePath = $this->changeViewFilePath($imagePath);
             $templateId = $this->templateRepository->create($advertiserId, $url, $imagePath, $bannerText);
-            $template = $this->templateRepository->getById($templateId);
+            $template = $this->templateRepository->getById($advertiserId, $templateId);
 
             $templateResponse = $this->createResponse($template);
             return $templateResponse;
@@ -71,10 +71,21 @@ class TemplateService {
         return $templateList;
     }
 
+    public function getById($advertiserId, $templateId, $ret = true) {
+        if (empty($templateId)){abort(response()->json(['message' => 'テンプレートIDは必須項目です。'], Response::HTTP_BAD_REQUEST));}
+        $template = $this->templateRepository->getById($advertiserId, $templateId);
+
+        $this->templateValidation->isExistTemplate($template);
+
+        if ($ret) {return $this->createResponse($template);}
+
+        return $template;
+    }
+
     public function deleteByTemplateId($advertiserId, $templateId) {
         if (empty($templateId)){abort(response()->json(['message' => 'テンプレートIDは必須項目です。'], Response::HTTP_BAD_REQUEST));}
 
-        $template = $this->templateRepository->getById($templateId);
+        $template = $this->templateRepository->getById($advertiserId, $templateId);
         $this->templateValidation->isExistTemplate($template);
         try {
             $this->templateRepository->deleteByTemplateId($templateId);
