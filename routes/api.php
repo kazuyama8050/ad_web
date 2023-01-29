@@ -82,7 +82,7 @@ Route::middleware([AdvertiserAuthenticate::class])->group(function () {
     Route::delete('/advertiser-template/{templateId}', [AdvertiserTemplateController::class, 'deleteByTemplateId']);
 
     //カテゴリ
-    Route::get('/advertise-category-all', [AdvertiserCategoryController::class, 'getAll']);
+    Route::get('/advertiser-category-all', [AdvertiserCategoryController::class, 'getAll']);
 
     //広告
     Route::post('/advertiser-advertise', [AdvertiserAdvertisementController::class, 'create']);

@@ -75,7 +75,7 @@ class GetAllCategoryTest extends TestCase
     public function test_正常()
     {
         AdvertiserLoginTrait::advertiserLogin($advertiserId = 1, $advertiserStoreAccount = 'store1');
-        $response = $this->get('/api/all-categories');
+        $response = $this->get('/api/advertiser-category-all');
         $responseBody = $response->decodeResponseJson();
 
         $responseExpected = [];
