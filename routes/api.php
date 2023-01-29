@@ -86,6 +86,7 @@ Route::middleware([AdvertiserAuthenticate::class])->group(function () {
 
     //広告
     Route::post('/advertiser-advertise', [AdvertiserAdvertisementController::class, 'create']);
+    Route::get('/advertiser-advertise-list', [AdvertiserAdvertisementController::class, 'getByAdvertiserid']);
 });
 
  /**

@@ -27,6 +27,22 @@ class AdvertisementRepository implements AdvertisementRepositoryInterface {
         return $this->rowMapper($advertisement);
     }
 
+    public function getByAdvertiserId($advertiserId) {
+        $advertisementList = DB::table('advertisements')->where('advertiser_id', $advertiserId)->get();
+
+        $advertisements = [];
+        
+        if (empty($advertisementList)) {
+            return null;
+        }
+
+        foreach ($advertisementList as $advertisement) {
+            $advertisements[] = $this->rowMapper($advertisement);
+        }
+
+        return $advertisements;
+    }
+
     /**
      * Summary of rowMapper
      * @param mixed $row

@@ -22,4 +22,11 @@ interface AdvertisementRepositoryInterface
      * @return int
      */
     public function create($advertiserId, $categoryId, $templateId, $name, $price);
+
+    /**
+     * Summary of getByAdvertiserId
+     * @param mixed $advertiserId
+     * @return array(Advertisement)
+     */
+    public function getByAdvertiserId($advertiserId);
 }

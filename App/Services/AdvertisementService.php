@@ -76,6 +76,23 @@ class AdvertisementService {
         return $advertisement;
     }
 
+    public function getByAdvertiserId($advertiserId, $ret = true) {
+        $advertisements = $this->advertisementRepository->getByAdvertiserId($advertiserId);
+        if (empty($advertisements) || $advertisements == null) {
+            return [];
+        }
+
+        if ($ret) {
+            $advertisementList = [];
+            foreach ($advertisements as $advertisement) {
+                $advertisementList[$advertisement->getId()] = $this->createResponse($advertisement);
+            }
+            return $advertisementList;
+        }
+
+        return $advertisements;
+    }
+
     public function create($advertiserId, $categoryId, $templateId, $name, $price) {
         if (empty($categoryId)){abort(response()->json(['message' => 'カテゴリは必須項目です。'], Response::HTTP_BAD_REQUEST));}
         if (empty($templateId)){abort(response()->json(['message' => 'テンプレートIDは必須項目です。'], Response::HTTP_BAD_REQUEST));}

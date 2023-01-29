@@ -32,4 +32,11 @@ class AdvertisementController extends Controller
         $advertisement = $this->advertisementService->getByIdForAdvertiser($advertiserId, $advertisementId);
         return json_encode($advertisement);
     }
+
+    public function getByAdvertiserid(Request $request) {
+        $advertiserId = $request->advertiserId;
+
+        $advertisements = $this->advertisementService->getByAdvertiserId($advertiserId);
+        return json_encode($advertisements);
+    }
 }
