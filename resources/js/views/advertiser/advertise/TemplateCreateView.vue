@@ -2,6 +2,7 @@
     <div class="container">
         <PageTitleComponent title="広告テンプレート作成"></PageTitleComponent>
         <AlertComponent :responseMessage="responseMessage"></AlertComponent>
+        <RightTopLinkComponent linkUrl="/advertiser/template/list" linkStr="テンプレート一覧"></RightTopLinkComponent>
         <form v-on:submit.prevent="submit">
             <div class="mb-3">
                 <label for="url" class="form-label">遷移先URL<span class="hissu">必須</span></label>
@@ -34,6 +35,7 @@ import FormRadioBoxComponent from "../../../components/form/FormRadioBoxComponen
 import FormButtonComponent from "../../../components/form/FormButtonComponent.vue";
 import PageTitleComponent from "../../../components/common/PageTitleComponent.vue";
 import AlertComponent from "../../../components/common/AlertComponent.vue";
+import RightTopLinkComponent from "../../../components/common/RightTopLinkComponent.vue";
 
 export default {
     name: "AdvertiserTemplateCreate",
@@ -44,6 +46,7 @@ export default {
         FormButtonComponent,
         PageTitleComponent,
         AlertComponent,
+        RightTopLinkComponent,
     },
     data: function() {
         return {
@@ -88,11 +91,12 @@ export default {
             formData.append('bannerImage', this.image);
             formData.append('bannerText', this.form.bannerText);
             formData.append('url', this.form.url);
-            axios.post('/api/advertise-template', formData, config)
+            axios.post('/api/advertiser-template', formData, config)
             .then((res) => {
                 if (res.status == 200) {
                     this.responseMessage = '広告テンプレートを登録しました。';
                     this.done = true;
+                    window.location.href = "/advertiser/template/list";
                 } else {
                     this.responseMessage = '予期せぬエラーが発生しました。'
                 }

@@ -1,81 +1,104 @@
 <template>
     <div class="container">
         <PageTitleComponent title="広告作成"></PageTitleComponent>
+        <AlertComponent :responseMessage="responseMessage"></AlertComponent>
+        <RightTopLinkComponent linkUrl="/advertiser/advertise/list" linkStr="広告一覧"></RightTopLinkComponent>
+        <AdvertiseDesignComponent :value="template"></AdvertiseDesignComponent>
+        <hr>
         <form v-on:submit.prevent="submit">
             <div class="mb-3">
-                <label for="url" class="form-label">遷移先URL<span class="hissu">必須</span></label>
-                <input type="url" class="form-control" id="url" v-model="form.url" required>
+                <label for="advertiseName" class="form-label">広告名<span class="hissu">必須</span></label>
+                <input type="advertiseName" class="form-control" id="advertiseName" v-model="form.advertiseName" required>
             </div>
             <div class="mb-3">
-                <label for="text" class="form-label">テキスト<span class="hissu">必須</span></label>
-                <textarea class="form-control" id="text" v-model="form.text" required></textarea>
+                <label for="price" class="form-label">価格<span class="hissu">必須</span></label>
+                <input type="price" class="form-control" id="price" v-model="form.price" required>
             </div>
             <div class="mb-3">
                 <label for="category_level" class="form-label">ジャンルカテゴリ階層<span class="hissu">必須</span></label><br>
-                <select class="form-select" v-model="form.category_level" required>
-                    <option v-for="(message) in category_levels" :value="message.name">{{ message.name }}</option>
+                <select class="form-select" v-model="form.categoryLevel" v-on:change="categoryLevelChange()" required>
+                    <option v-for="(value, key) in categoryLevels" :value="key">{{ value }}</option>
                 </select>
             </div>
             <div class="mb-3">
                 <label for="category" class="form-label">ジャンルカテゴリ<span class="hissu">必須</span></label><br>
-                <select class="form-select" v-model="form.category" required>
+                <select class="form-select" v-model="form.categoryId" required>
                     <option selected>Open this select menu</option>
-                    <option v-for="(message) in categories" :value="message.name">{{ message.name }}</option>
+                    <option v-for="(category) in categories" :value="category.id">{{ category.name }}</option>
                 </select>
             </div>
             <p v-if="responseMessage" class="alert alert-primary" role="alert">{{ responseMessage }}</p>
             <div class="d-grid gap-2 col-6 mx-auto pt-xl-5">
-                <button class="btn btn-primary" type="submit">確認</button>
+                <button class="btn btn-primary" type="submit">作成</button>
             </div>
         </form>
-        <p v-if="done == true">{{ responseMessage }}</p>
     </div>
 </template>
 <script>
 import Vue from "vue";
-import FormTextComponent from "../../../components/form/FormTextComponent.vue";
-import FormSelectBoxComponent from "../../../components/form/FormSelectBoxComponent.vue";
-import FormRadioBoxComponent from "../../../components/form/FormRadioBoxComponent.vue";
-import FormButtonComponent from "../../../components/form/FormButtonComponent.vue";
 import PageTitleComponent from "../../../components/common/PageTitleComponent.vue";
+import AlertComponent from "../../../components/common/AlertComponent.vue";
+import AdvertiseDesignComponent from "../../../components/common/AdvertiseDesignComponent.vue";
+import RightTopLinkComponent from "../../../components/common/RightTopLinkComponent.vue";
+
+const categoryLevels = {
+    'level1' : '階層1',
+    'level2' : '階層2',
+    'level3' : '階層3',
+};
 
 export default {
-    name: "UserAdvertiseCreate",
+    name: "AdvertiserAdvertiseCreate",
     components: {
-        FormTextComponent,
-        FormSelectBoxComponent,
-        FormRadioBoxComponent,
-        FormButtonComponent,
         PageTitleComponent,
+        AlertComponent,
+        AdvertiseDesignComponent,
+        RightTopLinkComponent,
     },
     data: function() {
         return {
-            categories: [],
+            categoryLevels,
+            allCategories: Object,
+            categories: Object,
+            template: Object,
             form: [],
             responseMessage: null,
-            done: false,
         }
     },
     methods: {
-        getAllCategories() {
-            axios.get('/api/all-categories')
+        getTemplate() {
+            this.$route.params.templateId
+            axios.get('/api/advertiser-template/' + this.$route.params.templateId)
                 .then((res) => {
-                    this.categories = res.data;
+                    this.template = res.data;
+                })
+                .catch(error =>{
+                    this.responseMessage = error.response.data.message;
+                });
+        },  
+        getAllCategories() {
+            axios.get('/api/advertiser-category-all')
+                .then((res) => {
+                    this.allCategories = res.data;
+                    const targetLevel = 'level1'
+                    this.categories = this.allCategories[targetLevel]
                 });
         },
+        categoryLevelChange() {
+            const targetLevel = this.form.categoryLevel
+            this.categories = this.allCategories[targetLevel]
+        },
         submit: function() {
-            axios.post('/api/register-user-form', {
-                lastName: this.form.lastName,
-                firstName: this.form.firstName,
-                phone: this.form.phone,
-                email: this.form.email,
-                siteDomein: this.form.siteDomein,
-                category: this.form.category,
-            })
+            const formData = new FormData()
+            formData.append('categoryId', this.form.categoryId);
+            formData.append('templateId', this.template.id);
+            formData.append('name', this.form.name);
+            formData.append('price', this.form.price);
+            axios.post('/api/advertiser-advertise', formData)
             .then((res) => {
                 if (res.status == 200) {
-                    this.responseMessage = '仮登録が完了しました。';
-                    this.done = true;
+                    this.responseMessage = '広告を作成しました。';
+                    window.location.href = "/advertiser/advertise/list";
                 } else {
                     this.responseMessage = '予期せぬエラーが発生しました。'
                 }
@@ -87,6 +110,7 @@ export default {
     },
     mounted() {
         this.getAllCategories();
+        this.getTemplate();
     }
 }
 </script>
