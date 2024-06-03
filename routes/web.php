@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\UserAuthenticate;
+use App\Http\Middleware\UserAuthenticateRedirector;
+use App\Http\Middleware\AdvertiserAuthenticate;
+use App\Http\Middleware\AdvertiserAuthenticateRedirector;
+use App\Http\Middleware\AdminAuthenticate;
+use App\Http\Middleware\AdminAuthenticateRedirector;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,12 +19,45 @@ use App\Http\Controllers\Controller;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+/**
+ * アフィリエイター
+ */
+Route::get($_ENV['USER_ROOT_PATH']."/login", function() {
+    return view($_ENV['USER_ROOT_PATH'].'/app_no_header');
+})->middleware(UserAuthenticateRedirector::class);
 
-Route::get('/{any}', function() {
-    return view('app');
-})->where('any', '.*');
+Route::get($_ENV['USER_ROOT_PATH'].'/register', function() {
+    return view($_ENV['USER_ROOT_PATH'].'/app_no_header');
+});
 
-// Route::get('/test', [Controller::class, 'getTest']);
+Route::get($_ENV['USER_ROOT_PATH'].'/{any}', function() {
+    return view($_ENV['USER_ROOT_PATH'].'/app');
+})->where('any', '.*')->middleware(UserAuthenticate::class);
+
+
+/**
+ * 広告主
+ */
+Route::get($_ENV['ADVERTISER_ROOT_PATH']."/login", function() {
+    return view($_ENV['ADVERTISER_ROOT_PATH'].'/app_no_header');
+})->middleware(AdvertiserAuthenticateRedirector::class);
+
+Route::get($_ENV['ADVERTISER_ROOT_PATH'].'/register', function() {
+    return view($_ENV['ADVERTISER_ROOT_PATH'].'/app_no_header');
+});
+Route::get($_ENV['ADVERTISER_ROOT_PATH'].'/{any}', function() {
+    return view($_ENV['ADVERTISER_ROOT_PATH'].'/app');
+})->where('any', '.*')->middleware(AdvertiserAuthenticate::class);
+
+
+/**
+ * 管理者
+ */
+Route::get($_ENV['ADMIN_ROOT_PATH']."/login", function() {
+    return view($_ENV['ADMIN_ROOT_PATH'].'/app_no_header');
+})->middleware(AdminAuthenticateRedirector::class);
+
+Route::get($_ENV['ADMIN_ROOT_PATH'].'/{any}', function() {
+    return view($_ENV['ADMIN_ROOT_PATH'].'/app');
+})->where('any', '.*')->middleware(AdminAuthenticate::class);
+

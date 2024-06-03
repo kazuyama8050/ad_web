@@ -1,0 +1,171 @@
+/* ページタイトル */
+.page-title {
+    padding: 1rem 2rem;
+    border-left: 4px solid #000;
+    margin-bottom: 2.5%;
+}
+.hissu {
+    margin-left: 10px;
+    font-size: small;
+    color: red;
+}
+.container {
+    margin-bottom: 5%;
+}
+
+// ダミーヘッダー
+.dummy-header {
+    margin-top: 5%;
+}
+
+// login
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+.login {
+  width: 400px;
+  margin: 16px auto;
+  font-size: 16px;
+}
+
+/* Reset top and bottom margins from certain elements */
+.login-header,
+.login p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* The triangle form is achieved by a CSS hack */
+.login-triangle {
+  width: 0;
+  margin-right: auto;
+  margin-left: auto;
+  border: 12px solid transparent;
+  border-bottom-color: #28d;
+}
+
+.login-header {
+  background: #28d;
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.login-container {
+  background: #ebebeb;
+  padding: 12px;
+}
+
+/* Every row inside .login-container is defined with p tags */
+.login p {
+  padding: 12px;
+}
+
+.login input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+.login button {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+.login input[type="email"],
+.login input[type="password"] {
+  background: #fff;
+  border-color: #bbb;
+  color: #555;
+}
+
+/* Text fields' focus effect */
+.login input[type="email"]:focus,
+.login input[type="password"]:focus {
+  border-color: #888;
+}
+
+.login input[type="submit"] {
+  background: #28d;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.login input[type="submit"]:hover {
+  background: #17c;
+}
+
+/* Buttons' focus effect */
+.login input[type="submit"]:focus {
+  border-color: #05a;
+}
+
+.login button[type="submit"] {
+  background: #28d;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.login button[type="submit"]:hover {
+  background: #17c;
+}
+
+/* Buttons' focus effect */
+.login button[type="submit"]:focus {
+  border-color: #05a;
+}
+
+// テーブル 横スクロール
+.table-wrap {
+  overflow-x: scroll;
+}
+
+// アフィリエイトリンクデザイン
+.adlink-container {
+  width: 400px;
+  height: 120px;
+  display: flex;
+  background: #c6e4ff;
+  border-bottom: solid 6px #aac5de;
+  border-radius: 9px;
+}
+.adlink-element {
+  height: 120px;
+}
+.adlink-element img {
+  height: 100px;
+  width: 100px;
+  margin-top: 8px;
+  margin-left: 5px;
+}
+.adlink-element p {
+  height: 120px;
+	width: 300px;
+	padding-right: 5px;
+	padding-left: 5px;
+	display: grid;
+	place-items: center center;
+}
+
+// ページ右上リンク
+.right-top-link {
+  text-align: right;
+  padding-right: 5%;
+  margin-bottom: 20px;
+}

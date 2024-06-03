@@ -20,3 +20,15 @@ bash: warning: setlocale: LC_ALL: cannot change locale (ja_JP.UTF-8)
 ```
 
 localedef -f UTF-8 -i ja_JP ja_JP
+
+
+## mysql データ削除時の外部キー制約一時解除
+制約解除
+```
+SET foreign_key_checks = 0;
+```
+
+外部キー制約有効
+```
+SET foreign_key_checks = 1;
+```
