@@ -19,7 +19,7 @@ class AdminSeeder extends Seeder
         $passwordHash = Hash::make($password);
         DB::table('admins')->insert([
             'password' => $passwordHash,
-            'email' => 'kazuki118050@gmail.com',
+            'email' => 'test@gmail.com',
             'authority' => 1,
         ]);
 

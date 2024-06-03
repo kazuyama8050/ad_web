@@ -46,7 +46,7 @@ class RegisterApplyFormTest extends TestCase
             'lastName' => '田中',
             'firstName' => '太郎',
             'phone' => '000-0000-0000',
-            'email' => 'kazuki118050@gmail.com',
+            'email' => 'test@gmail.com',
             'siteDomein' => 'aaaaa.com',
             'category' => '金融',
         ];
@@ -54,7 +54,7 @@ class RegisterApplyFormTest extends TestCase
         $responseBody = [
             'lastName' => '田中',
             'firstName' => '太郎',
-            'email' => 'kazuki118050@gmail.com',
+            'email' => 'test@gmail.com',
             'phone' => '000-0000-0000',
             'category' => '金融',
             'siteDomein' => 'aaaaa.com',
